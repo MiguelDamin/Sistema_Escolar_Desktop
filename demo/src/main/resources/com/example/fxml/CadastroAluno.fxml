@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+ <VBox xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.controller.CadastroAlunoController"
+      spacing="15" 
+      style="-fx-padding: 30; -fx-background-color: #f5f5f5;">
+    
+    <!-- Título -->
+    <Label text="Cadastro de Aluno" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+    <Separator/>
+    
+    <!-- Nome do Aluno -->
+    <Label text="Nome do Aluno:"/>
+    <TextField fx:id="txtNome" promptText="Digite o nome completo"/>
+    
+    <!-- Idade -->
+    <Label text="Idade:"/>
+    <TextField fx:id="txtIdade" promptText="Digite a idade"/>
+
+    <Label text="CPF:"/>
+    <TextField fx:id="txtCpf" promptText="Digite o CPF"/>
+    
+    
+    <!-- Email -->
+    <Label text="Email:"/>
+    <TextField fx:id="txtEmail" promptText="email@exemplo.com"/>
+    
+    <!-- Telefone -->
+    <Label text="Telefone:"/>
+    <TextField fx:id="txtTelefone" promptText="(00) 00000-0000"/>
+    
+    <!-- Turma -->
+    <Label text="Turma:"/>
+    <ComboBox fx:id="cbTurma" promptText="Selecione a turma" prefWidth="300"/>
+    
+    <!-- Nome do Responsável -->
+    <Label text="Nome do Responsável:"/>
+    <TextField fx:id="txtResponsavel" promptText="Digite o nome do responsável"/>
+    
+    <!-- Botões -->
+    <HBox spacing="10" style="-fx-padding: 10 0 0 0;">
+        <Button text="Limpar" onAction="#onLimpar" prefWidth="100"/>
+        <Button text="Salvar" onAction="#onSalvar" prefWidth="100"/>
+        <Label fx:id="print" layoutX="123" layoutY="456" text="" />
+
+
+    </HBox>
+    
+    <!-- Mensagem -->
+   
+    
+</VBox>
