@@ -1,11 +1,19 @@
 package com.example.controller;
 
+import java.io.IOException;
+
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 
 public class CadastroAlunoController {
@@ -105,6 +113,21 @@ private void showAlert(Alert.AlertType type, String title, String message) {
         txtTelefone.clear();
         cbTurma.setValue(null);
         txtResponsavel.clear();
+
+    }
+
+    @FXML
+    private void onVoltar(ActionEvent event) throws IOException{
+            Parent novaCena = FXMLLoader.load(getClass().getResource("/com/example/fxml/Telainicial.fxml"));
+
+        // Pega a janela atual a partir do botão clicado
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Troca a cena
+            Scene scene = new Scene(novaCena);
+            stage.setScene(scene);
+            stage.show();
+
 
     }
 

@@ -47,6 +47,7 @@
     <HBox spacing="10" style="-fx-padding: 10 0 0 0;">
         <Button text="Limpar" onAction="#onLimpar" prefWidth="100"/>
         <Button text="Salvar" onAction="#onSalvar" prefWidth="100"/>
+        <Button text="Voltar" onAction="#onVoltar" prefWidth="100"/>
         <Label fx:id="print" layoutX="123" layoutY="456" text="" />
 
 

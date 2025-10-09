@@ -1,28 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.controller.RegisterController"
+           prefWidth="1200" prefHeight="800"
+           stylesheets="@../css/styles.css"
+           styleClass="login-container">
+          
 
- <VBox xmlns="http://javafx.com/javafx/8"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.controller.RegisterController"
-      spacing="15" 
-      style="-fx-padding: 30; -fx-background-color: #f5f5f5;">
     
-    <!-- Título -->
-    <Label text="Login" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
-    <Separator/>
-    
-    <!-- Nome do Aluno -->
-    <Label text="Nome do Aluno:"/>
-    <TextField fx:id="txtUsuario" promptText="Digite seu usuário"/>
-    
-    <!-- Idade -->
-    <Label text="Senha"/>
-    <PasswordField fx:id="txtSenha" promptText="Digite sua senha"/>
-    <Button text="Entrar" onAction="#onEntrar" prefWidth="100"/>
-  
-   
-</VBox>
+    <VBox alignment="CENTER" spacing="0">
+        
+        <!-- Card Principal -->
+        <VBox styleClass="glass-card" spacing="30" maxWidth="450" minWidth="450">
+            
+            <!-- Cabeçalho -->
+            <VBox alignment="CENTER" spacing="12">
+                <Label text="Bem-vindo!" styleClass="title"/>
+                <Label text="Entre com suas credenciais" styleClass="subtitle"/>
+            </VBox>
+            
+            <!-- Separador -->
+            <Separator styleClass="separator"/>
+            
+            <!-- Formulário -->
+            <VBox spacing="20">
+                
+                <!-- Campo Usuário -->
+                <VBox spacing="8">
+                    <Label text="Usuário" style="-fx-text-fill: #d4d4d8;"/>
+                    <TextField fx:id="txtUsuario"
+                              promptText="Digite seu usuário"
+                              styleClass="text-field"
+                              prefHeight="50"/>
+                </VBox>
+                
+                <!-- Campo Senha -->
+                <VBox spacing="8">
+                    <Label text="Senha" style="-fx-text-fill: #d4d4d8;"/>
+                    <PasswordField fx:id="txtSenha"
+                                  promptText="Digite sua senha"
+                                  styleClass="password-field"
+                                  prefHeight="50"/>
+                </VBox>
+                
+                <!-- Label de Mensagem -->
+                <Label fx:id="txtLabel"
+                       styleClass="error-label"
+                       visible="false"
+                       wrapText="true"/>
+                
+                <!-- Botão Entrar -->
+                <Button text="Entrar"
+                       onAction="#onEntrar"
+                       styleClass="button"
+                       maxWidth="Infinity"
+                       prefHeight="55"/>
+                
+                <!-- Separador -->
+                <Separator styleClass="separator"/>
+                <Label fx:id="txtLabel"
+                       text=""
+                       style="-fx-text-fill: #d4d4d8; -fx-font-size: 14px;"
+                       wrapText="true"
+                       alignment="CENTER"/>
+                
+                <!-- Botão Cadastrar -->
+                <Button text="Cadastrar-se"
+                       onAction="#onTelaCadastro"
+                       styleClass="button-secondary"
+                       maxWidth="Infinity"
+                       prefHeight="50"/>
+                
+            </VBox>
+        </VBox>
+    </VBox>
+</StackPane>

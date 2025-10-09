@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+ <VBox xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.controller.CadastroUsuarioController"
+      spacing="15" 
+      style="-fx-padding: 30; -fx-background-color: #f5f5f5;">
+    
+    <!-- Título -->
+    <Label text="Cadastro" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+    <Separator/>
+    
+    <!-- Nome do Aluno -->
+    <Label text="Nome do Aluno:"/>
+    <TextField fx:id="txtUsuarioCadastro" promptText="Digite seu usuário"/>
+    
+    <Label text="Email:"/>
+    <TextField fx:id="txtEmailCadastro" promptText="Digite seu email"/>
+
+    <!-- Idade -->
+    <Label text="Senha"/>
+    <PasswordField fx:id="txtSenhaCadastro" promptText="Digite sua senha"/>
+    <Button text="Cadastrar" onAction="#onCadastrar" prefWidth="100"/>
+  
+   
+</VBox>
