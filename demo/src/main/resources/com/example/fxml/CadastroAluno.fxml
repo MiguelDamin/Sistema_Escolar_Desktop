@@ -10,6 +10,8 @@
       fx:controller="com.example.controller.CadastroAlunoController"
       spacing="15" 
       style="-fx-padding: 30; -fx-background-color: #f5f5f5;">
+       <stylesheets="@../css/styles.css"
+           styleClass="main-container">
     
     <!-- Título -->
     <Label text="Cadastro de Aluno" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>

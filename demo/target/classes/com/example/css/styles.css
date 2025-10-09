@@ -1,0 +1,363 @@
+/* ===== TEMA ESCURO PROFISSIONAL - MINIMALISTA ===== */
+
+/* ============================================
+   FUNDO PRINCIPAL - PRETO TOTAL
+   ============================================ */
+.root {
+    -fx-background-color: #000000;
+}
+
+.main-container,
+.login-container {
+    -fx-background-color: #000000;
+}
+
+/* ============================================
+   CARDS - DESIGN ESCURO MINIMALISTA
+   ============================================ */
+.glass-card,
+.card {
+    -fx-background-color: #0a0a0a;
+    -fx-background-radius: 16;
+    -fx-border-color: #1f1f1f;
+    -fx-border-radius: 16;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 20, 0, 0, 8);
+    -fx-padding: 40;
+}
+
+/* ============================================
+   TÍTULOS E TEXTOS
+   ============================================ */
+.title {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+}
+
+.subtitle {
+    -fx-font-size: 15px;
+    -fx-text-fill: #737373;
+}
+
+.welcome-title {
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+}
+
+.section-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #ffffff;
+}
+
+Label {
+    -fx-text-fill: #a3a3a3;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+}
+
+/* ============================================
+   CAMPOS DE TEXTO - ESCURO MINIMALISTA
+   ============================================ */
+.text-field,
+.password-field {
+    -fx-background-color: #0f0f0f;
+    -fx-background-radius: 10;
+    -fx-border-color: #262626;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+    -fx-padding: 14 18;
+    -fx-font-size: 15px;
+    -fx-text-fill: #ffffff;
+    -fx-prompt-text-fill: #525252;
+}
+
+.text-field:focused,
+.password-field:focused {
+    -fx-background-color: #141414;
+    -fx-border-color: #404040;
+}
+
+.text-field:hover,
+.password-field:hover {
+    -fx-border-color: #333333;
+}
+
+/* ============================================
+   BOTÕES - MINIMALISTA ESCURO/BRANCO
+   ============================================ */
+.button {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10;
+    -fx-text-fill: #000000;
+    -fx-font-size: 15px;
+    -fx-font-weight: 600;
+    -fx-padding: 14 28;
+    -fx-cursor: hand;
+    -fx-border-width: 0;
+}
+
+.button:hover {
+    -fx-background-color: #e5e5e5;
+}
+
+.button:pressed {
+    -fx-background-color: #d4d4d4;
+}
+
+/* ============================================
+   BOTÕES SECUNDÁRIOS - ESCURO COM BORDA
+   ============================================ */
+.button-secondary {
+    -fx-background-color: transparent;
+    -fx-background-radius: 10;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+    -fx-font-weight: 600;
+    -fx-padding: 14 28;
+    -fx-cursor: hand;
+    -fx-border-color: #404040;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+}
+
+.button-secondary:hover {
+    -fx-background-color: #0f0f0f;
+    -fx-border-color: #525252;
+}
+
+.button-secondary:pressed {
+    -fx-background-color: #1a1a1a;
+}
+
+/* ============================================
+   BOTÃO SUCCESS - CINZA ESCURO
+   ============================================ */
+.button-success {
+    -fx-background-color: #1a1a1a;
+    -fx-background-radius: 10;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 600;
+    -fx-padding: 14 28;
+    -fx-border-color: #404040;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+}
+
+.button-success:hover {
+    -fx-background-color: #262626;
+    -fx-border-color: #525252;
+}
+
+.button-success:pressed {
+    -fx-background-color: #0f0f0f;
+}
+
+/* ============================================
+   BOTÃO DANGER - VERMELHO ESCURO MINIMALISTA
+   ============================================ */
+.button-danger {
+    -fx-background-color: #1a0f0f;
+    -fx-background-radius: 10;
+    -fx-text-fill: #ff6b6b;
+    -fx-font-weight: 600;
+    -fx-padding: 14 28;
+    -fx-border-color: #402626;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+}
+
+.button-danger:hover {
+    -fx-background-color: #261414;
+    -fx-border-color: #523333;
+}
+
+/* ============================================
+   COMBOBOX
+   ============================================ */
+.combo-box {
+    -fx-background-color: #0f0f0f;
+    -fx-background-radius: 10;
+    -fx-border-color: #262626;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+    -fx-padding: 10;
+}
+
+.combo-box:hover {
+    -fx-border-color: #333333;
+}
+
+.combo-box:focused {
+    -fx-border-color: #404040;
+    -fx-background-color: #141414;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: #0a0a0a;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 10;
+}
+
+.combo-box .list-cell:hover {
+    -fx-background-color: #1a1a1a;
+}
+
+.combo-box .list-cell:selected {
+    -fx-background-color: #262626;
+    -fx-text-fill: #ffffff;
+}
+
+/* ============================================
+   COMBOBOX ARROW BUTTON
+   ============================================ */
+.combo-box .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.combo-box .arrow {
+    -fx-background-color: #737373;
+}
+
+/* ============================================
+   SEPARADORES
+   ============================================ */
+.separator {
+    -fx-background-color: #1f1f1f;
+}
+
+.separator .line {
+    -fx-border-color: #1f1f1f;
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #262626;
+    -fx-background-radius: 8;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #333333;
+}
+
+.scroll-bar .track {
+    -fx-background-color: #0a0a0a;
+    -fx-background-radius: 8;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+    -fx-background-color: #737373;
+}
+
+/* ============================================
+   SCROLLPANE
+   ============================================ */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .corner {
+    -fx-background-color: #0a0a0a;
+}
+
+/* ============================================
+   MENSAGENS
+   ============================================ */
+.error-label {
+    -fx-text-fill: #ff6b6b;
+    -fx-font-size: 13px;
+    -fx-padding: 5 0 0 0;
+    -fx-font-weight: 500;
+}
+
+.success-label {
+    -fx-text-fill: #a3a3a3;
+    -fx-font-size: 13px;
+    -fx-padding: 5 0 0 0;
+    -fx-font-weight: 500;
+}
+
+.info-box {
+    -fx-background-color: #0f0f0f;
+    -fx-background-radius: 10;
+    -fx-border-color: #262626;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+    -fx-padding: 14;
+}
+
+/* ============================================
+   HYPERLINK
+   ============================================ */
+.hyperlink {
+    -fx-text-fill: #ffffff;
+    -fx-underline: false;
+    -fx-border-width: 0;
+    -fx-font-weight: 500;
+}
+
+.hyperlink:hover {
+    -fx-text-fill: #d4d4d4;
+    -fx-underline: true;
+}
+
+.hyperlink:visited {
+    -fx-text-fill: #a3a3a3;
+}
+
+/* ============================================
+   TAMANHOS DE CONTAINER
+   ============================================ */
+.container-small {
+    -fx-max-width: 450px;
+    -fx-pref-width: 450px;
+}
+
+.container-medium {
+    -fx-max-width: 650px;
+    -fx-pref-width: 650px;
+}
+
+.container-large {
+    -fx-max-width: 900px;
+    -fx-pref-width: 900px;
+}
+
+/* ============================================
+   ESPAÇAMENTOS
+   ============================================ */
+.spacing-small {
+    -fx-spacing: 12;
+}
+
+.spacing-medium {
+    -fx-spacing: 24;
+}
+
+.spacing-large {
+    -fx-spacing: 36;
+}
+
+.padding-all {
+    -fx-padding: 24;
+}
