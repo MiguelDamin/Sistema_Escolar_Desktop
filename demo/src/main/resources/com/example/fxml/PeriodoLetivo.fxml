@@ -4,7 +4,7 @@
 
 <StackPane xmlns="http://javafx.com/javafx/17"
            xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="com.example.controller.CadastroProfessorController"
+           fx:controller="com.example.controller.PeriodoLetivo"
            stylesheets="@../css/styles.css"
            styleClass="main-container">
     
@@ -14,7 +14,7 @@
             <VBox styleClass="card" spacing="25" maxWidth="650">
                 
                 <VBox spacing="8">
-                    <Label text="Cadastro de Professor" styleClass="title"/>
+                    <Label text="Cadastro Perído Letivo e Horário" styleClass="title"/>
                     <Label text="Preencha os dados abaixo" styleClass="subtitle"/>
                 </VBox>
                 
@@ -22,38 +22,33 @@
                 
                 <VBox spacing="20">
                     <VBox spacing="8">
-                        <Label text="Nome do Professor"/>
-                        <TextField fx:id="txtNomeProfessor" promptText="Digite o nome completo" prefHeight="50"/>
+                        <Label text="Horário de inicio"/>
+                        <TextField fx:id="txtHorarioInicio" promptText="HH:MM" prefHeight="50"/>
                     </VBox>
                     
                     <VBox spacing="8">
-                        <Label text="Idade"/>
-                        <TextField fx:id="txtIdadeProfessor" promptText="Digite a idade" prefHeight="50"/>
+                        <Label text="Horário de Fim"/>
+                        <TextField fx:id="txtHorarioFim" promptText="HH:MM" prefHeight="50"/>
                     </VBox>
                     
                     <VBox spacing="8">
-                        <Label text="CPF"/>
-                        <TextField fx:id="txtCpfProfessor" promptText="Digite o CPF" prefHeight="50"/>
+                        <Label text="Data de Inicio: "/>
+                        <DatePicker fx:id="DataInicio" promptText="DD/MM/AAAA" prefHeight="50"/>
                     </VBox>
                     
                     <VBox spacing="8">
-                        <Label text="Email"/>
-                        <TextField fx:id="txtEmailProfessor" promptText="email@exemplo.com" prefHeight="50"/>
+                        <Label text="Data de Fim"/>
+                        <DatePicker fx:id="DataFim" promptText="DD/MM/AAAA" prefHeight="50"/>
                     </VBox>
                     
-                    <VBox spacing="8">
-                        <Label text="Telefone"/>
-                        <TextField fx:id="txtTelefoneProfessor" promptText="(00) 00000-0000" prefHeight="50"/>
-                    </VBox>
                 </VBox>
                 
                 <Separator styleClass="separator"/>
                 
-                <Label fx:id="LabelProfessor" styleClass="success-label" visible="false"/>
+                <Label fx:id="LabelPeriodoLetivo" styleClass="success-label" visible="false"/>
                 
                 <HBox spacing="15" alignment="CENTER">
-                    <Button text="Limpar" onAction="#onLimpar" styleClass="button-secondary" prefWidth="180" prefHeight="50"/>
-                    <Button text="Salvar" onAction="#onSalvarProfessor" styleClass="button-success" prefWidth="180" prefHeight="50"/>
+                    <Button text="Salvar" onAction="#onSalvarPeriodoLetivo" styleClass="button-success" prefWidth="180" prefHeight="50"/>
                     <Button text="Voltar" onAction="#onVoltar" styleClass="button-secondary" prefWidth="180" prefHeight="50"/>
                 </HBox>
             </VBox>

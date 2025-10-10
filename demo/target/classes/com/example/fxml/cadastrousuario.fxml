@@ -1,32 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
- <VBox xmlns="http://javafx.com/javafx/8"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.controller.CadastroUsuarioController"
-      spacing="15" 
-      style="-fx-padding: 30; -fx-background-color: #f5f5f5;">
-       <stylesheets="@../css/styles.css"
-           styleClass="main-container">
-    <!-- Título -->
-    <Label text="Cadastro" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
-    <Separator/>
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.controller.CadastroUsuarioController"
+           stylesheets="@../css/styles.css"
+           styleClass="login-container">
     
-    <!-- Nome do Aluno -->
-    <Label text="Nome do Aluno:"/>
-    <TextField fx:id="txtUsuarioCadastro" promptText="Digite seu usuário"/>
-    
-    <Label text="Email:"/>
-    <TextField fx:id="txtEmailCadastro" promptText="Digite seu email"/>
-
-    <!-- Idade -->
-    <Label text="Senha"/>
-    <PasswordField fx:id="txtSenhaCadastro" promptText="Digite sua senha"/>
-    <Button text="Cadastrar" onAction="#onCadastrar" prefWidth="100"/>
-  
-   
-</VBox>
+    <VBox alignment="CENTER" spacing="0">
+        <VBox styleClass="glass-card" spacing="30" maxWidth="450">
+            
+            <VBox alignment="CENTER" spacing="12">
+                <Label text="Criar Conta" styleClass="title"/>
+                <Label text="Preencha seus dados" styleClass="subtitle"/>
+            </VBox>
+            
+            <Separator styleClass="separator"/>
+            
+            <VBox spacing="20">
+                <VBox spacing="8">
+                    <Label text="Usuário"/>
+                    <TextField fx:id="txtUsuarioCadastro" promptText="Digite seu usuário" prefHeight="50"/>
+                </VBox>
+                
+                <VBox spacing="8">
+                    <Label text="Email"/>
+                    <TextField fx:id="txtEmailCadastro" promptText="Digite seu email" prefHeight="50"/>
+                </VBox>
+                
+                <VBox spacing="8">
+                    <Label text="Senha"/>
+                    <PasswordField fx:id="txtSenhaCadastro" promptText="Digite sua senha" prefHeight="50"/>
+                </VBox>
+                
+                <Button text="Cadastrar" onAction="#onCadastrar" styleClass="button" maxWidth="Infinity" prefHeight="55"/>
+            </VBox>
+        </VBox>
+    </VBox>
+</StackPane>

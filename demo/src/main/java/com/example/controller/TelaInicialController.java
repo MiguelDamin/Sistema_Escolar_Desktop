@@ -49,4 +49,32 @@ public class TelaInicialController {
         stage.setScene(scene);
         stage.show();
       }
+
+      @FXML
+      private void onVoltar(ActionEvent event) throws IOException{
+         Parent novaCena = FXMLLoader.load(getClass().getResource("/com/example/fxml/register.fxml"));
+
+    // Pega a janela atual a partir do botão clicado
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Troca a cena
+        Scene scene = new Scene(novaCena);
+        stage.setScene(scene);
+        stage.show();
+      }
+
+      @FXML
+      private void onPeriodoLetivo(ActionEvent event) throws IOException{
+        Parent novaCena = FXMLLoader.load(getClass().getResource("/com/example/fxml/PeriodoLetivo.fxml"));
+
+    // Pega a janela atual a partir do botão clicado
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Troca a cena
+        Scene scene = new Scene(novaCena);
+        stage.setScene(scene);
+        stage.show();
+      
+      }
 }
+

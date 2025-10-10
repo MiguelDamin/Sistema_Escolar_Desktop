@@ -1,4 +1,4 @@
-/* ===== TEMA ESCURO PROFISSIONAL - MINIMALISTA ===== */
+/* ===== TEMA ESCURO PROFISSIONAL - OTIMIZADO ===== */
 
 /* ============================================
    FUNDO PRINCIPAL - PRETO TOTAL
@@ -13,7 +13,7 @@
 }
 
 /* ============================================
-   CARDS - DESIGN ESCURO MINIMALISTA
+   CARDS - DESIGN ESCURO MINIMALISTA (SEM SOMBRA PESADA)
    ============================================ */
 .glass-card,
 .card {
@@ -22,7 +22,6 @@
     -fx-border-color: #1f1f1f;
     -fx-border-radius: 16;
     -fx-border-width: 1;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 20, 0, 0, 8);
     -fx-padding: 40;
 }
 
@@ -59,7 +58,7 @@ Label {
 }
 
 /* ============================================
-   CAMPOS DE TEXTO - ESCURO MINIMALISTA
+   CAMPOS DE TEXTO - OTIMIZADO
    ============================================ */
 .text-field,
 .password-field {
@@ -86,7 +85,7 @@ Label {
 }
 
 /* ============================================
-   BOTÕES - MINIMALISTA ESCURO/BRANCO
+   BOTÕES - OTIMIZADO (SEM ANIMAÇÃO DE ESCALA)
    ============================================ */
 .button {
     -fx-background-color: #ffffff;
@@ -108,7 +107,7 @@ Label {
 }
 
 /* ============================================
-   BOTÕES SECUNDÁRIOS - ESCURO COM BORDA
+   BOTÕES SECUNDÁRIOS
    ============================================ */
 .button-secondary {
     -fx-background-color: transparent;
@@ -133,7 +132,7 @@ Label {
 }
 
 /* ============================================
-   BOTÃO SUCCESS - CINZA ESCURO
+   BOTÃO SUCCESS
    ============================================ */
 .button-success {
     -fx-background-color: #1a1a1a;
@@ -156,7 +155,7 @@ Label {
 }
 
 /* ============================================
-   BOTÃO DANGER - VERMELHO ESCURO MINIMALISTA
+   BOTÃO DANGER
    ============================================ */
 .button-danger {
     -fx-background-color: #1a0f0f;
@@ -175,7 +174,7 @@ Label {
 }
 
 /* ============================================
-   COMBOBOX
+   COMBOBOX - OTIMIZADO
    ============================================ */
 .combo-box {
     -fx-background-color: #0f0f0f;
@@ -210,9 +209,6 @@ Label {
     -fx-text-fill: #ffffff;
 }
 
-/* ============================================
-   COMBOBOX ARROW BUTTON
-   ============================================ */
 .combo-box .arrow-button {
     -fx-background-color: transparent;
 }
@@ -233,7 +229,7 @@ Label {
 }
 
 /* ============================================
-   SCROLLBAR
+   SCROLLBAR - SIMPLIFICADO
    ============================================ */
 .scroll-bar {
     -fx-background-color: transparent;

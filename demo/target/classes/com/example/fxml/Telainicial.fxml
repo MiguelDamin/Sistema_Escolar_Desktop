@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 
 <StackPane xmlns="http://javafx.com/javafx/17"
            xmlns:fx="http://javafx.com/fxml/1"
@@ -11,12 +8,44 @@
            stylesheets="@../css/styles.css"
            styleClass="main-container">
     
-    <!-- Título -->
-    <Label text="Bem-vindo ao Sistema de Gestão Escolar!!" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+    <VBox alignment="CENTER" spacing="40">
+        
+        <VBox alignment="CENTER" spacing="12">
+            <Label text="Bem-vindo ao Sistema de Gestão Escolar!!" styleClass="welcome-title"/>
+            <Label text="Escolha uma opção abaixo" styleClass="subtitle"/>
+        </VBox>
+        
+        <VBox styleClass="glass-card" spacing="20" maxWidth="500">
+            
+            <Button text="Cadastrar Professor" 
+                   onAction="#onCadastrarProfessor"
+                   styleClass="button"
+                   maxWidth="Infinity"
+                   prefHeight="60"/>
+            
+            <Button text="Cadastrar Curso" 
+                   onAction="#onCadastrarCurso"
+                   styleClass="button"
+                   maxWidth="Infinity"
+                   prefHeight="60"/>
+            
+            <Button text="Cadastrar Aluno" 
+                   onAction="#onCadastrarAluno"
+                   styleClass="button"
+                   maxWidth="Infinity"
+                   prefHeight="60"/>
 
-    <Button text="Cadastrar Professor" onAction="#onCadastrarProfessor" prefWidth="200"/>
-    <Button text="Cadastrar Curso" onAction="#onCadastrarCurso" prefWidth="200"/>
-    <Button text="Cadastrar Aluno" onAction="#onCadastrarAluno" prefWidth="200"/>
-    
-   
-</VBox>
+           <Button text="Cadastrar Periodo Letivo" 
+                   onAction="#onPeriodoLetivo"
+                   styleClass="button"
+                   maxWidth="Infinity"
+                   prefHeight="60"/>
+
+            <Button text="Voltar" 
+                   onAction="#onVoltar"
+                   styleClass="button"
+                   maxWidth="Infinity"
+                   prefHeight="60"/>
+        </VBox>
+    </VBox>
+</StackPane>
