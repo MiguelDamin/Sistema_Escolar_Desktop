@@ -1,36 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
- <VBox xmlns="http://javafx.com/javafx/8"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.controller.CadastroCursoController"
-      spacing="15" 
-      style="-fx-padding: 30; -fx-background-color: #f5f5f5;">
-      <stylesheets="@../css/styles.css"
-      styleClass="main-container">
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.controller.CadastroCursoController"
+           stylesheets="@../css/styles.css"
+           styleClass="main-container">
     
-    <!-- Título -->
-    <Label text="CadastroCurso" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
-
-    <Label text="Nome do Curso:"/>
-    <TextField fx:id="txtNomeCurso" promptText="Adicione o curso"/>
-
-    <Label text="Duração em anos:"/>
-    <TextField fx:id="txtDuracaoCurso" promptText="Adicione a duração do curso"/>
-
-
-     <Label fx:id="LabelCurso" layoutX="123" layoutY="456" text="" />
-
-     <Label fx:id="LabelConfirmacao" layoutX="123" layoutY="456" text="" />
-    <Button text="Salvar" onAction="#onSalvarCurso" prefWidth="100"/>
-    <Button text="Voltar" onAction="#onVoltar" prefWidth="100"/>
-
-
-  
-  
-   
-</VBox>
+    <VBox alignment="CENTER" spacing="30">
+        <VBox styleClass="glass-card" spacing="25" maxWidth="450">
+            
+            <VBox spacing="8">
+                <Label text="Cadastro de Curso" styleClass="section-title"/>
+            </VBox>
+            
+            <Separator styleClass="separator"/>
+            
+            <VBox spacing="20">
+                <VBox spacing="8">
+                    <Label text="Nome do Curso"/>
+                    <TextField fx:id="txtNomeCurso" promptText="Adicione o curso" prefHeight="50"/>
+                </VBox>
+                
+                <VBox spacing="8">
+                    <Label text="Duração em anos"/>
+                    <TextField fx:id="txtDuracaoCurso" promptText="Adicione a duração" prefHeight="50"/>
+                </VBox>
+            </VBox>
+            
+            <Label fx:id="LabelCurso" styleClass="error-label" visible="false"/>
+            <Label fx:id="LabelConfirmacao" styleClass="success-label" visible="false"/>
+            
+            <Button text="Salvar" onAction="#onSalvarCurso" styleClass="button-success" maxWidth="Infinity" prefHeight="55"/>
+            <Button text="Voltar" onAction="#onVoltar" styleClass="button-secondary" maxWidth="Infinity" prefHeight="50"/>
+        </VBox>
+    </VBox>
+</StackPane>

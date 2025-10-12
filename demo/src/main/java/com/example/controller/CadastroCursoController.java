@@ -22,7 +22,7 @@ public class CadastroCursoController {
     private void onSalvarCurso(){
         String nomecurso = txtNomeCurso.getText();
         String duracaocurso = txtDuracaoCurso.getText();
-        if(nomecurso.isEmpty()){
+        if(nomecurso.isEmpty() || duracaocurso.isEmpty()){
             LabelCurso.setText("Erro, é impossível continuar com o nome do curso em branco!!");
         }else{
             LabelConfirmacao.setText("Curso Cadastrado");

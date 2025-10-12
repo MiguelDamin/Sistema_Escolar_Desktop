@@ -45,7 +45,9 @@
                 
                 <Separator styleClass="separator"/>
                 
-                <Label fx:id="LabelPeriodoLetivo" styleClass="success-label" visible="false"/>
+                <Label fx:id="LabelPeriodoLetivo" styleClass="success-label" visible="false" style="-fx-text-fill: #d4d4d8; -fx-font-size: 14px;"
+                       wrapText="true"
+                       alignment="CENTER"/>
                 
                 <HBox spacing="15" alignment="CENTER">
                     <Button text="Salvar" onAction="#onSalvarPeriodoLetivo" styleClass="button-success" prefWidth="180" prefHeight="50"/>

@@ -1,4 +1,9 @@
-/home/miguel/Documentos/desktop_java/desktop_projeto/demo/src/main/java/com/example/controller/RegisterController.java
-/home/miguel/Documentos/desktop_java/desktop_projeto/demo/src/main/java/com/example/App.java
-/home/miguel/Documentos/desktop_java/desktop_projeto/demo/src/main/java/module-info.java
-/home/miguel/Documentos/desktop_java/desktop_projeto/demo/src/main/java/com/example/controller/CadastroAlunoController.java
+/home/miguel/Documentos/desktop_java/desktop_projeto/Sistema_Escolar_Desktop/demo/src/main/java/com/example/App.java
+/home/miguel/Documentos/desktop_java/desktop_projeto/Sistema_Escolar_Desktop/demo/src/main/java/module-info.java
+/home/miguel/Documentos/desktop_java/desktop_projeto/Sistema_Escolar_Desktop/demo/src/main/java/com/example/controller/TelaInicialController.java
+/home/miguel/Documentos/desktop_java/desktop_projeto/Sistema_Escolar_Desktop/demo/src/main/java/com/example/controller/CadastroProfessorController.java
+/home/miguel/Documentos/desktop_java/desktop_projeto/Sistema_Escolar_Desktop/demo/src/main/java/com/example/controller/RegisterController.java
+/home/miguel/Documentos/desktop_java/desktop_projeto/Sistema_Escolar_Desktop/demo/src/main/java/com/example/controller/CadastroCursoController.java
+/home/miguel/Documentos/desktop_java/desktop_projeto/Sistema_Escolar_Desktop/demo/src/main/java/com/example/controller/CadastroAlunoController.java
+/home/miguel/Documentos/desktop_java/desktop_projeto/Sistema_Escolar_Desktop/demo/src/main/java/com/example/controller/CadastroUsuarioController.java
+/home/miguel/Documentos/desktop_java/desktop_projeto/Sistema_Escolar_Desktop/demo/src/main/java/com/example/controller/PeriodoLetivo.java

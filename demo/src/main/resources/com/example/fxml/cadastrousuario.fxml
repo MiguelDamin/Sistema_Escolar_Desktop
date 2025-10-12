@@ -35,6 +35,7 @@
                 </VBox>
                 
                 <Button text="Cadastrar" onAction="#onCadastrar" styleClass="button" maxWidth="Infinity" prefHeight="55"/>
+                <Button text="Voltar" onAction="#onVoltar" styleClass="button-secondary" maxWidth="Infinity" prefHeight="55"/>
             </VBox>
         </VBox>
     </VBox>
