@@ -27,9 +27,12 @@ public class PeriodoLetivo{
      
         if(horainicial.isEmpty() || horafinal.isEmpty() || DataInicio.getValue() == null || DataFim.getValue() == null){
             LabelPeriodoLetivo.setText("Erro: Todos os campos são obrigatórios");
+            LabelPeriodoLetivo.setVisible(true);
 
         }else{
             LabelPeriodoLetivo.setText("Cadastro realizado com sucesso");
+            LabelPeriodoLetivo.setVisible(true);
+
         }
     }
 

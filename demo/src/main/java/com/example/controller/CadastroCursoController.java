@@ -23,9 +23,11 @@ public class CadastroCursoController {
         String nomecurso = txtNomeCurso.getText();
         String duracaocurso = txtDuracaoCurso.getText();
         if(nomecurso.isEmpty() || duracaocurso.isEmpty()){
-            LabelCurso.setText("Erro, é impossível continuar com o nome do curso em branco!!");
+            LabelCurso.setText("Erro: Todos os campos são obrigatórios");
+            LabelCurso.setVisible(true);
         }else{
             LabelConfirmacao.setText("Curso Cadastrado");
+            LabelConfirmacao.setVisible(true);
         }
     }
 

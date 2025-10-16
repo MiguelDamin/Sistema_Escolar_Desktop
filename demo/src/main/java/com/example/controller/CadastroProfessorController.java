@@ -20,8 +20,21 @@ public class CadastroProfessorController {
     @FXML private TextField txtTelefoneProfessor;
     @FXML private Label LabelProfessor;
 
+    @FXML
+    public void inicializate(){
+         txtCpfProfessor.textProperty().addListener((observable, oldValue, newValue) -> {
+        if (newValue.length() > 11) {
+            txtCpfProfessor.setText(oldValue);
+        }
+    });
 
-
+    txtTelefoneProfessor.textProperty().addListener((observable, oldValue, newValue) -> {
+        if (newValue.length() > 11) {
+            txtTelefoneProfessor.setText(oldValue);
+        }
+    
+    });
+    }
     @FXML
     private void onSalvarProfessor(){
         String nomeprofessor = txtNomeProfessor.getText();
@@ -32,9 +45,12 @@ public class CadastroProfessorController {
 
         if(nomeprofessor.isEmpty() || idadeprofessor.isEmpty() || cpfprofessor == null || 
         emailprofessor.isEmpty() || telefoneprofessor.isEmpty()){
-            LabelProfessor.setText("Erro, preencha todos os campos!!!");
+            LabelProfessor.setText("Erro: Todos os campos são obrigatórios");
+            LabelProfessor.setVisible(true);
         }else{
             LabelProfessor.setText("Usuário Altamente Cadastrado!!");
+            LabelProfessor.setVisible(true);
+            
         }
 
     }
