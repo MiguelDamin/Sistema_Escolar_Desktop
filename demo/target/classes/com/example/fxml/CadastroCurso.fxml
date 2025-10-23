@@ -27,6 +27,10 @@
                     <Label text="Duração em anos"/>
                     <TextField fx:id="txtDuracaoCurso" promptText="Adicione a duração" prefHeight="50"/>
                 </VBox>
+                <VBox spacing="8">
+                    <Label text="Descrição"/>
+                    <TextArea fx:id="txtDescricaoCurso" promptText="Adicione a descrição do curso" prefHeight="100" wrapText="true"/>
+                    </VBox>
             </VBox>
             
             <Label fx:id="LabelCurso" styleClass="error-label" visible="false"/>

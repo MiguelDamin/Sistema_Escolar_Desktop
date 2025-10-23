@@ -20,6 +20,7 @@
                 
                 <Separator styleClass="separator"/>
                 
+                <!-- DADOS DO ALUNO -->
                 <VBox spacing="20">
                     <VBox spacing="8">
                         <Label text="Nome do Aluno"/>
@@ -33,7 +34,7 @@
                     
                     <VBox spacing="8">
                         <Label text="CPF"/>
-                        <TextField fx:id="txtCpf" promptText="Digite o CPF" prefHeight="50"/>
+                        <TextField fx:id="txtCpf" promptText="Digite o CPF (somente números)" prefHeight="50"/>
                     </VBox>
                     
                     <VBox spacing="8">
@@ -47,13 +48,50 @@
                     </VBox>
                     
                     <VBox spacing="8">
-                        <Label text="Turma"/>
-                        <ComboBox fx:id="cbTurma" promptText="Selecione a turma" maxWidth="Infinity" prefHeight="50"/>
+                        <Label text="Data de Nascimento"/>
+                        <DatePicker fx:id="dtDataNascimento" promptText="Selecione a data" prefHeight="50" maxWidth="Infinity"/>
                     </VBox>
                     
                     <VBox spacing="8">
+                        <Label text="Turma"/>
+                        <ComboBox fx:id="cbTurma" promptText="Selecione a turma" maxWidth="Infinity" prefHeight="50"/>
+                    </VBox>
+                </VBox>
+                
+                <Separator styleClass="separator"/>
+                
+                <!-- DADOS DO RESPONSÁVEL -->
+                <VBox spacing="20">
+                    <Label text="Dados do Responsável" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    
+                    <VBox spacing="8">
                         <Label text="Nome do Responsável"/>
-                        <TextField fx:id="txtResponsavel" promptText="Digite o nome do responsável" prefHeight="50"/>
+                        <TextField fx:id="txtNomeResponsavel" promptText="Digite o nome completo" prefHeight="50"/>
+                    </VBox>
+                    
+                    <VBox spacing="8">
+                        <Label text="CPF do Responsável"/>
+                        <TextField fx:id="txtCpfResponsavel" promptText="Digite o CPF (somente números)" prefHeight="50"/>
+                    </VBox>
+                    
+                    <VBox spacing="8">
+                        <Label text="Telefone do Responsável"/>
+                        <TextField fx:id="txtTelefoneResponsavel" promptText="(00) 00000-0000" prefHeight="50"/>
+                    </VBox>
+                    
+                    <VBox spacing="8">
+                        <Label text="Email do Responsável"/>
+                        <TextField fx:id="txtEmailResponsavel" promptText="exemplo@email.com" prefHeight="50"/>
+                    </VBox>
+                    
+                    <VBox spacing="8">
+                        <Label text="Endereço"/>
+                        <TextField fx:id="txtEnderecoResponsavel" promptText="Rua, número, bairro, cidade" prefHeight="50"/>
+                    </VBox>
+                    
+                    <VBox spacing="8">
+                        <Label text="Parentesco"/>
+                        <ComboBox fx:id="cbParentesco" promptText="Selecione o parentesco" maxWidth="Infinity" prefHeight="50"/>
                     </VBox>
                 </VBox>
                 

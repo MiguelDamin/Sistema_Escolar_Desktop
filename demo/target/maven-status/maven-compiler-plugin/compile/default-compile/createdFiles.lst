@@ -1,2 +1,10 @@
+com/example/controller/CadastroCursoController.class
 com/example/App.class
+com/example/controller/PeriodoLetivo.class
+com/example/controller/CadastroProfessorController.class
+com/example/controller/TelaInicialController.class
+com/example/controller/CadastroUsuarioController.class
+com/example/controller/CadastroAlunoController.class
 module-info.class
+com/example/controller/RegisterController.class
+com/example/util/DatabaseConnection.class
