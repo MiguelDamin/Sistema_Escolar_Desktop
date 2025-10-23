@@ -29,6 +29,9 @@ public class CadastroUsuarioController {
         String email = txtEmailCadastro.getText();
         String usuario = txtUsuarioCadastro.getText();
 
+        // if(senha.isEmpty() || email.isEmpty() || usuario.isEmpty()){
+            
+        // }
 
 
     }

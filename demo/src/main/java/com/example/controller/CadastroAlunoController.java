@@ -99,7 +99,8 @@ private void showAlert(Alert.AlertType type, String title, String message) {
         if (nome == null || nome.trim().isEmpty() || 
         cpf == null || cpf.trim().isEmpty() || 
         turma == null){ 
-            print.setText("Não deixe campos vazios!!");
+            print.setText("Erro: Todos os campos são obrigatórios");
+            print.setVisible(true);
         }else{
             showAlert(Alert.AlertType.INFORMATION, "Sucesso", "Aluno salvo com sucesso!!");
         }

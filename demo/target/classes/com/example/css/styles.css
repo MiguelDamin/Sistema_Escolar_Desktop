@@ -52,7 +52,7 @@
 }
 
 Label {
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #a3a3a3;
     -fx-font-size: 14px;
     -fx-font-weight: 500;
 }
@@ -281,16 +281,16 @@ Label {
    ============================================ */
 .error-label {
     -fx-text-fill: #ff6b6b;
-    -fx-font-size: 13px;
-    -fx-padding: 5 0 0 0;
-    -fx-font-weight: 500;
+    -fx-font-size: 14px;
+    -fx-padding: 8 0 0 0;
+    -fx-font-weight: 600;
 }
 
 .success-label {
-    -fx-text-fill: #a3a3a3;
-    -fx-font-size: 13px;
-    -fx-padding: 5 0 0 0;
-    -fx-font-weight: 500;
+    -fx-text-fill: #4ade80;
+    -fx-font-size: 14px;
+    -fx-padding: 8 0 0 0;
+    -fx-font-weight: 600;
 }
 
 .info-box {
@@ -356,4 +356,25 @@ Label {
 
 .padding-all {
     -fx-padding: 24;
+}
+
+/* ============================================
+   ÍCONES NOS BOTÕES
+   ============================================ */
+.button-with-icon {
+    -fx-content-display: left;
+    -fx-graphic-text-gap: 12;
+    -fx-alignment: center-left;
+}
+/* ============================================
+   FONT AWESOME
+   ============================================ */
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('/com/example/fonts/fontawesome-webfont.ttf');
+}
+
+.icon {
+    -fx-font-family: 'FontAwesome';
+    -fx-font-size: 48px;
 }
