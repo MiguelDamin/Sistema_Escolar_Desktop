@@ -6,4 +6,5 @@
 /home/miguel/Documentos/desktop_java/desktop_projeto/Sistema_Escolar_Desktop/demo/src/main/java/com/example/controller/CadastroCursoController.java
 /home/miguel/Documentos/desktop_java/desktop_projeto/Sistema_Escolar_Desktop/demo/src/main/java/com/example/controller/CadastroAlunoController.java
 /home/miguel/Documentos/desktop_java/desktop_projeto/Sistema_Escolar_Desktop/demo/src/main/java/com/example/controller/CadastroUsuarioController.java
+/home/miguel/Documentos/desktop_java/desktop_projeto/Sistema_Escolar_Desktop/demo/src/main/java/com/example/util/DatabaseConnection.java
 /home/miguel/Documentos/desktop_java/desktop_projeto/Sistema_Escolar_Desktop/demo/src/main/java/com/example/controller/PeriodoLetivo.java
