@@ -15,6 +15,11 @@ public class TelaInicialController {
     private void onCadastrarAluno(MouseEvent event) throws IOException{
         carregarCena("/com/example/fxml/CadastroAluno.fxml", event);
     }
+
+    @FXML
+    private void onCadastrarTurma(MouseEvent event) throws IOException{
+        carregarCena("/com/example/fxml/CadastroTurma.fxml", event);
+    }
     
     @FXML
     private void onCadastrarCurso(MouseEvent event) throws IOException{

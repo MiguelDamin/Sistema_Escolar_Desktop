@@ -1,10 +1,12 @@
 package com.example.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import com.example.model.Estudante;
 import com.example.model.Responsavel;
 import com.example.repository.EstudanteDAO;
+import com.example.repository.MatriculaDAO;
 import com.example.repository.ResponsavelDAO;
 
 import javafx.collections.FXCollections;
@@ -45,6 +47,7 @@ public class CadastroAlunoController {
     
     private ResponsavelDAO responsavelDAO = new ResponsavelDAO();
     private EstudanteDAO estudanteDAO = new EstudanteDAO();
+    private MatriculaDAO matriculaDAO = new MatriculaDAO(); // NOVO DAO
     
     @FXML
     public void initialize() {
@@ -90,85 +93,92 @@ public class CadastroAlunoController {
         });
     }
     @FXML
-private void onSalvar() {
-    try {
-        // VALIDAÇÕES BÁSICAS
-        if (txtNome == null || txtNome.getText().trim().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Erro", "Digite o nome do aluno!");
-            return;
+    private void onSalvar() {
+        try {
+            // VALIDAÇÕES BÁSICAS
+            if (txtNome == null || txtNome.getText().trim().isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "Digite o nome do aluno!");
+                return;
+            }
+            
+            if (txtCpf == null || txtCpf.getText().trim().isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "Digite o CPF do aluno!");
+                return;
+            }
+            
+            if (txtIdade == null || txtIdade.getText().trim().isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "Digite a idade do aluno!");
+                return;
+            }
+            
+            if (dtDataNascimento == null || dtDataNascimento.getValue() == null) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "Selecione a data de nascimento!");
+                return;
+            }
+            
+            if (txtNomeResponsavel == null || txtNomeResponsavel.getText().trim().isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "Digite o nome do responsável!");
+                return;
+            }
+            
+            if (txtCpfResponsavel == null || txtCpfResponsavel.getText().trim().isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "Digite o CPF do responsável!");
+                return;
+            }
+            
+            if (cbParentesco == null || cbParentesco.getValue() == null) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "Selecione o parentesco!");
+                return;
+            }
+            
+            // 1️⃣ CRIAR OBJETO RESPONSÁVEL
+            Responsavel responsavel = new Responsavel(
+                txtNomeResponsavel.getText().trim(),
+                txtCpfResponsavel.getText().trim(),
+                txtTelefoneResponsavel.getText().trim(),
+                txtEmailResponsavel.getText().trim(),
+                txtEnderecoResponsavel.getText().trim(),
+                cbParentesco.getValue()
+            );
+            
+            // 2️⃣ SALVAR RESPONSÁVEL E PEGAR O ID
+            int idResponsavel = responsavelDAO.salvar(responsavel);
+            System.out.println("Responsável salvo com ID: " + idResponsavel);
+            
+            // 3️⃣ CRIAR OBJETO ESTUDANTE COM O ID DO RESPONSÁVEL
+            Estudante estudante = new Estudante(
+                txtNome.getText().trim(),
+                Integer.parseInt(txtIdade.getText().trim()),
+                txtCpf.getText().trim(),
+                txtEmail.getText().trim(),
+                txtTelefone.getText().trim(),
+                dtDataNascimento.getValue().toString(),
+                idResponsavel
+            );
+            
+            // 4️⃣ SALVAR ESTUDANTE E OBTER O ID GERADO
+            int idEstudante = estudanteDAO.salvar(estudante);
+            System.out.println("Estudante salvo com ID: " + idEstudante);
+            
+            // 5️⃣ REGISTRAR MATRÍCULA
+            int idMatricula = matriculaDAO.salvar(idEstudante);
+            System.out.println("Matrícula registrada com ID: " + idMatricula);
+            
+            // SUCESSO!
+            showAlert(Alert.AlertType.INFORMATION, "Sucesso", "Aluno, Responsável e Matrícula cadastrados com sucesso!");
+            onLimpar();
+            
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "A idade deve ser um número válido!");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Erro ao salvar no banco de dados: " + e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Erro ao salvar: " + e.getMessage());
+            e.printStackTrace();
         }
-        
-        if (txtCpf == null || txtCpf.getText().trim().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Erro", "Digite o CPF do aluno!");
-            return;
-        }
-        
-        if (txtIdade == null || txtIdade.getText().trim().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Erro", "Digite a idade do aluno!");
-            return;
-        }
-        
-        if (dtDataNascimento == null || dtDataNascimento.getValue() == null) {
-            showAlert(Alert.AlertType.ERROR, "Erro", "Selecione a data de nascimento!");
-            return;
-        }
-        
-        if (txtNomeResponsavel == null || txtNomeResponsavel.getText().trim().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Erro", "Digite o nome do responsável!");
-            return;
-        }
-        
-        if (txtCpfResponsavel == null || txtCpfResponsavel.getText().trim().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Erro", "Digite o CPF do responsável!");
-            return;
-        }
-        
-        if (cbParentesco == null || cbParentesco.getValue() == null) {
-            showAlert(Alert.AlertType.ERROR, "Erro", "Selecione o parentesco!");
-            return;
-        }
-        
-        // 1️⃣ CRIAR OBJETO RESPONSÁVEL
-        Responsavel responsavel = new Responsavel(
-            txtNomeResponsavel.getText().trim(),
-            txtCpfResponsavel.getText().trim(),
-            txtTelefoneResponsavel.getText().trim(),
-            txtEmailResponsavel.getText().trim(),
-            txtEnderecoResponsavel.getText().trim(),
-            cbParentesco.getValue()
-        );
-        
-        // 2️⃣ SALVAR RESPONSÁVEL E PEGAR O ID
-        int idResponsavel = responsavelDAO.salvar(responsavel);
-        System.out.println("Responsável salvo com ID: " + idResponsavel);
-        
-        // 3️⃣ CRIAR OBJETO ESTUDANTE COM O ID DO RESPONSÁVEL
-        Estudante estudante = new Estudante(
-            txtNome.getText().trim(),
-            Integer.parseInt(txtIdade.getText().trim()),
-            txtCpf.getText().trim(),
-            txtEmail.getText().trim(),
-            txtTelefone.getText().trim(),
-            dtDataNascimento.getValue().toString(),
-            idResponsavel
-        );
-        
-        // 4️⃣ SALVAR ESTUDANTE
-        estudanteDAO.salvar(estudante);
-        System.out.println("Estudante salvo com sucesso!");
-        
-        // SUCESSO!
-        showAlert(Alert.AlertType.INFORMATION, "Sucesso", "Aluno e Responsável cadastrados com sucesso!");
-        onLimpar();
-        
-    } catch (NumberFormatException e) {
-        showAlert(Alert.AlertType.ERROR, "Erro", "A idade deve ser um número válido!");
-        e.printStackTrace();
-    } catch (Exception e) {
-        showAlert(Alert.AlertType.ERROR, "Erro", "Erro ao salvar: " + e.getMessage());
-        e.printStackTrace();
     }
-}
     
     @FXML
     private void onLimpar() {

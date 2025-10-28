@@ -39,7 +39,12 @@
                        onMouseClicked="#onCadastrarAluno"
                        styleClass="menu-item"
                        maxWidth="Infinity"/>
-                
+
+                <Button text="Turmas" 
+                       onMouseClicked="#onCadastrarTurma"
+                       styleClass="menu-item"
+                       maxWidth="Infinity"/>
+
                 <Button text="Cursos" 
                        onMouseClicked="#onCadastrarCurso"
                        styleClass="menu-item"
