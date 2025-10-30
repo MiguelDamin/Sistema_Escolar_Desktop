@@ -2,19 +2,21 @@ package com.example.model;
 
 /**
  * Model para a entidade Turma.
+ * Representa as turmas cadastradas no sistema.
  */
 public class Turma {
     private int id_turma;
     private String nome;
-    private int ano;
+    private int id_periodo_letivo;
+    private int id_grade;
     
     // Construtor vazio
     public Turma() {}
     
     // Construtor para cadastro (sem id)
-    public Turma(String nome, int ano) {
+    public Turma(String nome, int id_periodo_letivo) {
         this.nome = nome;
-        this.ano = ano;
+        this.id_periodo_letivo = id_periodo_letivo;
     }
 
     // Getters
@@ -26,8 +28,12 @@ public class Turma {
         return nome;
     }
 
-    public int getAno() {
-        return ano;
+    public int getId_periodo_letivo() {
+        return id_periodo_letivo;
+    }
+
+    public int getId_grade() {
+        return id_grade;
     }
 
     // Setters
@@ -39,13 +45,17 @@ public class Turma {
         this.nome = nome;
     }
 
-    public void setAno(int ano) {
-        this.ano = ano;
+    public void setId_periodo_letivo(int id_periodo_letivo) {
+        this.id_periodo_letivo = id_periodo_letivo;
     }
 
-    // Método para exibição em ComboBox/TableView
+    public void setId_grade(int id_grade) {
+        this.id_grade = id_grade;
+    }
+
+    // Método para exibição em ComboBox
     @Override
     public String toString() {
-        return nome + " (" + ano + ")";
+        return nome;
     }
 }

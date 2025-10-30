@@ -1,44 +1,70 @@
 package com.example.controller;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
+import com.example.model.PeriodoLetivo;
 import com.example.model.Turma;
+import com.example.repository.PeriodoLetivoDAO;
 import com.example.repository.TurmaDAO;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.time.Year;
 
 /**
  * Controller para a tela de Cadastro de Turmas.
+ * Permite selecionar o Período Letivo disponível.
  */
 public class CadastroTurmaController {
     
     @FXML private TextField txtNomeTurma;
-    @FXML private TextField txtAnoLetivo;
+    @FXML private ComboBox<PeriodoLetivo> cbPeriodoLetivo;
     @FXML private Label lblMensagemErro;
     @FXML private Label lblMensagemSucesso;
     
     private TurmaDAO turmaDAO = new TurmaDAO();
+    private PeriodoLetivoDAO periodoDAO = new PeriodoLetivoDAO();
+    private ObservableList<PeriodoLetivo> periodosDisponiveis = FXCollections.observableArrayList();
     
     @FXML
     public void initialize() {
         System.out.println("🎬 Controller de Turma inicializado!");
         
-        // Limitar ano letivo a apenas números
-        txtAnoLetivo.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*")) {  // Regex: apenas dígitos
-                txtAnoLetivo.setText(oldValue);
-            }
-        });
+        // Proteção: só carrega se o ComboBox existir
+        if (cbPeriodoLetivo != null) {
+            carregarPeriodosLetivos();
+        } else {
+            System.err.println("⚠️ cbPeriodoLetivo é NULL! Verifique o fx:id no FXML!");
+        }
         
         limparMensagens();
+    }
+    
+    /**
+     * Carrega os períodos letivos do banco e preenche o ComboBox
+     */
+    private void carregarPeriodosLetivos() {
+        try {
+            System.out.println("📋 Carregando períodos letivos...");
+            periodosDisponiveis.clear();
+            periodosDisponiveis.addAll(periodoDAO.listarTodos());
+            cbPeriodoLetivo.setItems(periodosDisponiveis);
+            System.out.println("✅ " + periodosDisponiveis.size() + " períodos carregados!");
+        } catch (SQLException e) {
+            System.err.println("❌ Erro ao carregar períodos: " + e.getMessage());
+            mostrarErro("Não foi possível carregar os períodos letivos: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
     
     /**
@@ -52,7 +78,7 @@ public class CadastroTurmaController {
             // ========== VALIDAÇÕES ==========
             
             String nome = txtNomeTurma.getText().trim();
-            String anoStr = txtAnoLetivo.getText().trim();
+            PeriodoLetivo periodoSelecionado = cbPeriodoLetivo.getValue();
             
             if (nome.isEmpty()) {
                 mostrarErro("O nome da turma é obrigatório!");
@@ -60,43 +86,33 @@ public class CadastroTurmaController {
                 return;
             }
             
-            if (anoStr.isEmpty()) {
-                mostrarErro("O ano letivo é obrigatório!");
-                txtAnoLetivo.requestFocus();
-                return;
-            }
-            
-            int ano;
-            try {
-                ano = Integer.parseInt(anoStr);
-            } catch (NumberFormatException e) {
-                mostrarErro("O ano letivo deve ser um número válido!");
-                txtAnoLetivo.requestFocus();
-                return;
-            }
-            
-            // Regra de negócio: Ano deve ser razoável
-            int anoAtual = Year.now().getValue();
-            if (ano < anoAtual - 5 || ano > anoAtual + 5) {
-                mostrarErro("O ano letivo parece inválido. Use um ano próximo ao atual.");
-                txtAnoLetivo.requestFocus();
+            if (periodoSelecionado == null) {
+                mostrarErro("Selecione um período letivo!");
+                cbPeriodoLetivo.requestFocus();
                 return;
             }
             
             // ========== CRIAÇÃO DO OBJETO E INSERÇÃO ==========
             
-            Turma novaTurma = new Turma(nome, ano);
+            Turma novaTurma = new Turma();
+            novaTurma.setNome(nome);
+            novaTurma.setId_periodo_letivo(periodoSelecionado.getId_periodo_letivo());
+            
+            System.out.println("💾 Salvando turma: " + nome + " (Período: " + periodoSelecionado.getId_periodo_letivo() + ")");
             
             // Chama DAO para salvar
             int id = turmaDAO.salvar(novaTurma);
             
+            System.out.println("✅ Turma salva com ID: " + id);
             mostrarSucesso("Turma cadastrada com sucesso! ID: " + id);
             onLimpar();
             
         } catch (SQLException e) {
+            System.err.println("❌ Erro SQL: " + e.getMessage());
             mostrarErro("Erro ao salvar turma: " + e.getMessage());
             e.printStackTrace();
         } catch (Exception e) {
+            System.err.println("❌ Erro inesperado: " + e.getMessage());
             mostrarErro("Erro inesperado: " + e.getMessage());
             e.printStackTrace();
         }
@@ -107,8 +123,8 @@ public class CadastroTurmaController {
      */
     @FXML
     private void onLimpar() {
-        txtNomeTurma.clear();
-        txtAnoLetivo.clear();
+        if (txtNomeTurma != null) txtNomeTurma.clear();
+        if (cbPeriodoLetivo != null) cbPeriodoLetivo.setValue(null);
         limparMensagens();
     }
     
@@ -129,21 +145,33 @@ public class CadastroTurmaController {
     // ========== MÉTODOS AUXILIARES ==========
     
     private void limparMensagens() {
-        lblMensagemErro.setText("");
-        lblMensagemErro.setVisible(false);
-        lblMensagemSucesso.setText("");
-        lblMensagemSucesso.setVisible(false);
+        if (lblMensagemErro != null) {
+            lblMensagemErro.setText("");
+            lblMensagemErro.setVisible(false);
+        }
+        if (lblMensagemSucesso != null) {
+            lblMensagemSucesso.setText("");
+            lblMensagemSucesso.setVisible(false);
+        }
     }
     
     private void mostrarErro(String mensagem) {
         limparMensagens();
-        lblMensagemErro.setText("❌ " + mensagem);
-        lblMensagemErro.setVisible(true);
+        if (lblMensagemErro != null) {
+            lblMensagemErro.setText("❌ " + mensagem);
+            lblMensagemErro.setVisible(true);
+        } else {
+            System.err.println("⚠️ lblMensagemErro é NULL!");
+        }
     }
     
     private void mostrarSucesso(String mensagem) {
         limparMensagens();
-        lblMensagemSucesso.setText("✅ " + mensagem);
-        lblMensagemSucesso.setVisible(true);
+        if (lblMensagemSucesso != null) {
+            lblMensagemSucesso.setText("✅ " + mensagem);
+            lblMensagemSucesso.setVisible(true);
+        } else {
+            System.out.println("⚠️ lblMensagemSucesso é NULL!");
+        }
     }
 }

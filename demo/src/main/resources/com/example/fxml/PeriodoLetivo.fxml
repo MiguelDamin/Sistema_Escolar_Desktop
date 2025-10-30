@@ -4,56 +4,69 @@
 
 <StackPane xmlns="http://javafx.com/javafx/17"
            xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="com.example.controller.PeriodoLetivo"
+           fx:controller="com.example.controller.CadastroPeriodoLetivoController"
            stylesheets="@../css/styles.css"
            styleClass="main-container">
     
-    <ScrollPane fitToWidth="true" style="-fx-background: transparent;">
-        <VBox alignment="TOP_CENTER" spacing="30" style="-fx-padding: 40;">
+    <VBox alignment="CENTER" spacing="30">
+        <VBox styleClass="glass-card" spacing="25" maxWidth="500">
             
-            <VBox styleClass="card" spacing="25" maxWidth="650">
+            <VBox spacing="8">
+                <Label text="Cadastro de Período Letivo" styleClass="section-title"/>
+            </VBox>
+            
+            <Separator styleClass="separator"/>
+            
+            <VBox spacing="20">
+                <VBox spacing="8">
+                    <Label text="Nome do Período (Ex: 1º Semestre 2025)"/>
+                    <TextField fx:id="txtNomePeriodo" 
+                              promptText="Digite o nome do período" 
+                              prefHeight="50"/>
+                </VBox>
                 
                 <VBox spacing="8">
-                    <Label text="Cadastro Perído Letivo e Horário" styleClass="title"/>
-                    <Label text="Preencha os dados abaixo" styleClass="subtitle"/>
+                    <Label text="Data de Início"/>
+                    <DatePicker fx:id="dtDataInicio" 
+                               promptText="Selecione a data de início" 
+                               prefHeight="50"
+                               maxWidth="Infinity"/>
                 </VBox>
                 
-                <Separator styleClass="separator"/>
-                
-                <VBox spacing="20">
-                    <VBox spacing="8">
-                        <Label text="Horário de inicio"/>
-                        <TextField fx:id="txtHorarioInicio" promptText="HH:MM" prefHeight="50"/>
-                    </VBox>
-                    
-                    <VBox spacing="8">
-                        <Label text="Horário de Fim"/>
-                        <TextField fx:id="txtHorarioFim" promptText="HH:MM" prefHeight="50"/>
-                    </VBox>
-                    
-                    <VBox spacing="8">
-                        <Label text="Data de Inicio: "/>
-                        <DatePicker fx:id="DataInicio" promptText="DD/MM/AAAA" prefHeight="50"/>
-                    </VBox>
-                    
-                    <VBox spacing="8">
-                        <Label text="Data de Fim"/>
-                        <DatePicker fx:id="DataFim" promptText="DD/MM/AAAA" prefHeight="50"/>
-                    </VBox>
-                    
+                <VBox spacing="8">
+                    <Label text="Data de Fim"/>
+                    <DatePicker fx:id="dtDataFim" 
+                               promptText="Selecione a data de fim" 
+                               prefHeight="50"
+                               maxWidth="Infinity"/>
                 </VBox>
                 
-                <Separator styleClass="separator"/>
+                <Label fx:id="lblMensagemErro" 
+                      styleClass="error-label" 
+                      visible="false"/>
                 
-                <Label fx:id="LabelPeriodoLetivo" styleClass="success-label" visible="false" style="-fx-text-fill: #d4d4d8; -fx-font-size: 14px;"
-                       wrapText="true"
-                       alignment="CENTER"/>
+                <Label fx:id="lblMensagemSucesso" 
+                      styleClass="success-label" 
+                      visible="false"/>
                 
-                <HBox spacing="15" alignment="CENTER">
-                    <Button text="Salvar" onAction="#onSalvarPeriodoLetivo" styleClass="button-success" prefWidth="180" prefHeight="50"/>
-                    <Button text="Voltar" onAction="#onVoltar" styleClass="button-secondary" prefWidth="180" prefHeight="50"/>
-                </HBox>
+                <Button text="Salvar Período Letivo" 
+                       onAction="#onSalvarPeriodoLetivo" 
+                       styleClass="button-success" 
+                       maxWidth="Infinity" 
+                       prefHeight="55"/>
+                
+                <Button text="Limpar" 
+                       onAction="#onLimpar" 
+                       styleClass="button-secondary" 
+                       maxWidth="Infinity" 
+                       prefHeight="50"/>
+                
+                <Button text="Voltar" 
+                       onAction="#onVoltar" 
+                       styleClass="button-secondary" 
+                       maxWidth="Infinity" 
+                       prefHeight="50"/>
             </VBox>
         </VBox>
-    </ScrollPane>
+    </VBox>
 </StackPane>

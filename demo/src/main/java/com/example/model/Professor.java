@@ -1,19 +1,15 @@
 package com.example.model;
 
-
 public class Professor {
-    // VARIÁVEIS = CAIXINHAS PARA GUARDAR DADOS
-    private int id_professor;      // ID do professor (número)
-    private String nome;           // Nome do professor
-    private int idade;             // Idade do professor
-    private String cpf;            // CPF do professor
-    private String email;          // Email do professor
-    private String telefone;       // Telefone do professor
+    private int id_professor;
+    private String nome;
+    private int idade;
+    private String cpf;
+    private String email;
+    private String telefone;
     
-    // CONSTRUTOR VAZIO = Criar professor sem dados
     public Professor() {}
     
-    // CONSTRUTOR COMPLETO = Criar professor já com dados
     public Professor(String nome, int idade, String cpf, String email, String telefone) {
         this.nome = nome;
         this.idade = idade;
@@ -22,7 +18,7 @@ public class Professor {
         this.telefone = telefone;
     }
     
-    // GETTERS = PEGAR VALOR DE DENTRO DA CAIXINHA
+    // Getters
     public int getIdProfessor() { 
         return id_professor; 
     }
@@ -47,7 +43,7 @@ public class Professor {
         return telefone; 
     }
     
-    // SETTERS = COLOCAR VALOR DENTRO DA CAIXINHA
+    // Setters
     public void setIdProfessor(int idProfessor) { 
         this.id_professor = idProfessor; 
     }
@@ -72,4 +68,9 @@ public class Professor {
         this.telefone = telefone; 
     }
     
+    // Para exibição no ComboBox
+    @Override
+    public String toString() {
+        return nome + " (CPF: " + cpf + ")";
+    }
 }
