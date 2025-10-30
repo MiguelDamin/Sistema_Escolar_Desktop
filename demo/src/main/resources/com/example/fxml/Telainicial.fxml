@@ -31,32 +31,37 @@
                 <Label text="CADASTROS" styleClass="menu-section-title"/>
                 
                 <Button text="Professores" 
-                       onMouseClicked="#onCadastrarProfessor"
+                       onAction="#onCadastrarProfessor"
                        styleClass="menu-item"
                        maxWidth="Infinity"/>
                 
                 <Button text="Alunos" 
-                       onMouseClicked="#onCadastrarAluno"
+                       onAction="#onCadastrarAluno"
                        styleClass="menu-item"
                        maxWidth="Infinity"/>
 
                 <Button text="Turmas" 
-                       onMouseClicked="#onCadastrarTurma"
+                       onAction="#onCadastrarTurma"
                        styleClass="menu-item"
                        maxWidth="Infinity"/>
 
                 <Button text="Cursos" 
-                       onMouseClicked="#onCadastrarCurso"
+                       onAction="#onCadastrarCurso"
                        styleClass="menu-item"
                        maxWidth="Infinity"/>
                 
                 <Button text="Periodo Letivo" 
-                       onMouseClicked="#onPeriodoLetivo"
+                       onAction="#onPeriodoLetivo"
                        styleClass="menu-item"
                        maxWidth="Infinity"/>
-                
-                <Button text="Turmas" 
-                       onAction="#onCadastrarTurma"
+                       
+                <Button text="Horários" 
+                       onAction="#onCadastroHorario"
+                       styleClass="menu-item"
+                       maxWidth="Infinity"/>
+                       
+                <Button text="Disciplinas" 
+                       onAction="#onCadastrarDisciplina"
                        styleClass="menu-item"
                        maxWidth="Infinity"/>
                 

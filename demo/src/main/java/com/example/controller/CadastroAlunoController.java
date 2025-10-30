@@ -5,11 +5,14 @@ import java.sql.SQLException;
 
 import com.example.model.Estudante;
 import com.example.model.Responsavel;
+import com.example.model.Turma;
 import com.example.repository.EstudanteDAO;
 import com.example.repository.MatriculaDAO;
+import com.example.repository.TurmaDAO;
 import com.example.repository.ResponsavelDAO;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,7 +35,7 @@ public class CadastroAlunoController {
     @FXML private TextField txtEmail;
     @FXML private TextField txtTelefone;
     @FXML private DatePicker dtDataNascimento;  // ← ADICIONAR NO FXML
-    @FXML private ComboBox<String> cbTurma;
+    @FXML private ComboBox<Turma> cbTurma; // ALTERADO PARA USAR O MODEL TURMA
     
     // CAMPOS DO RESPONSÁVEL
     @FXML private TextField txtNomeResponsavel;
@@ -47,17 +50,16 @@ public class CadastroAlunoController {
     
     private ResponsavelDAO responsavelDAO = new ResponsavelDAO();
     private EstudanteDAO estudanteDAO = new EstudanteDAO();
-    private MatriculaDAO matriculaDAO = new MatriculaDAO(); // NOVO DAO
+    private MatriculaDAO matriculaDAO = new MatriculaDAO();
+    private TurmaDAO turmaDAO = new TurmaDAO(); // NOVO DAO
+    private ObservableList<Turma> turmasCadastradas = FXCollections.observableArrayList();
     
     @FXML
     public void initialize() {
         System.out.println("Controller carregado com sucesso!");
         
-        // Preencher ComboBox de turmas
-        cbTurma.setItems(FXCollections.observableArrayList(
-            "1º Ano", "2º Ano", "3º Ano", "4º Ano", "5º Ano",
-            "6º Ano", "7º Ano", "8º Ano", "9º Ano"
-        ));
+        // Preencher ComboBox de turmas com dados do banco
+        carregarTurmas();
         
         // Preencher ComboBox de parentesco
         cbParentesco.setItems(FXCollections.observableArrayList(
@@ -98,6 +100,13 @@ public class CadastroAlunoController {
             // VALIDAÇÕES BÁSICAS
             if (txtNome == null || txtNome.getText().trim().isEmpty()) {
                 showAlert(Alert.AlertType.ERROR, "Erro", "Digite o nome do aluno!");
+                return;
+            }
+            
+            // NOVA VALIDAÇÃO: Seleção de Turma
+            Turma turmaSelecionada = cbTurma.getValue();
+            if (turmaSelecionada == null) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "Selecione a turma do aluno!");
                 return;
             }
             
@@ -161,8 +170,11 @@ public class CadastroAlunoController {
             System.out.println("Estudante salvo com ID: " + idEstudante);
             
             // 5️⃣ REGISTRAR MATRÍCULA
-            int idMatricula = matriculaDAO.salvar(idEstudante);
-            System.out.println("Matrícula registrada com ID: " + idMatricula);
+            // Pega o ID da Turma selecionada
+            int idTurma = turmaSelecionada.getId_turma(); 
+            
+            int idMatricula = matriculaDAO.salvar(idEstudante, idTurma); // Passa o idTurma
+            System.out.println("Matrícula registrada com ID: " + idMatricula + " na Turma ID: " + idTurma);
             
             // SUCESSO!
             showAlert(Alert.AlertType.INFORMATION, "Sucesso", "Aluno, Responsável e Matrícula cadastrados com sucesso!");
@@ -215,5 +227,19 @@ public class CadastroAlunoController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+    
+    /**
+     * Carrega as turmas do banco de dados e preenche o ComboBox.
+     */
+    private void carregarTurmas() {
+        try {
+            turmasCadastradas.clear();
+            turmasCadastradas.addAll(turmaDAO.listarTodos());
+            cbTurma.setItems(turmasCadastradas);
+        } catch (SQLException e) {
+            showAlert(Alert.AlertType.ERROR, "Erro de Banco de Dados", "Não foi possível carregar as turmas: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

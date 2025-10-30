@@ -1,27 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Text?>
-<StackPane fx:controller="com.example.controller.CadastroTurmaController" stylesheets="@../css/styles.css" styleClass="main-container">
-<VBox alignment="CENTER" spacing="30">
-<VBox styleClass="glass-card" spacing="25" maxWidth="450">
-<VBox spacing="8">
-<Label text="Cadastro de Turma" styleClass="section-title"/>
-</VBox>
-<Separator styleClass="separator"/>
-<VBox spacing="20">
-<VBox spacing="8">
-<Label text="Nome da Turma (Ex: 3º Ano A)"/>
-<TextField fx:id="txtNomeTurma" promptText="Adicione o nome da turma" prefHeight="50"/>
-</VBox>
-<VBox spacing="8">
-<Label text="Ano Letivo"/>
-<TextField fx:id="txtAnoLetivo" promptText="Adicione o ano (Ex: 2024)" prefHeight="50"/>
-</VBox>
-<Label fx:id="lblMensagemErro" styleClass="error-label" visible="false"/>
-<Label fx:id="lblMensagemSucesso" styleClass="success-label" visible="false"/>
-<Button text="Salvar Turma" onAction="#onSalvarTurma" styleClass="button-success" maxWidth="Infinity" prefHeight="55"/>
-<Button text="Voltar" onAction="#onVoltar" styleClass="button-secondary" maxWidth="Infinity" prefHeight="50"/>
-</VBox>
-</VBox>
-</VBox>
+
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.controller.CadastroTurmaController"
+           stylesheets="@../css/styles.css"
+           styleClass="main-container">
+    
+    <VBox alignment="CENTER" spacing="30">
+        <VBox styleClass="glass-card" spacing="25" maxWidth="500">
+            
+            <VBox spacing="8">
+                <Label text="Cadastro de Turma" styleClass="section-title"/>
+            </VBox>
+            
+            <Separator styleClass="separator"/>
+            
+            <VBox spacing="20">
+                <VBox spacing="8">
+                    <Label text="Nome da Turma (Ex: 3º Ano A)"/>
+                    <TextField fx:id="txtNomeTurma" 
+                              promptText="Adicione o nome da turma" 
+                              prefHeight="50"/>
+                </VBox>
+                
+                <VBox spacing="8">
+                    <Label text="Período Letivo"/>
+                    <ComboBox fx:id="cbPeriodoLetivo" 
+                             promptText="Selecione o período letivo" 
+                             maxWidth="Infinity" 
+                             prefHeight="50"/>
+                </VBox>
+                
+                <Label fx:id="lblMensagemErro" 
+                      styleClass="error-label" 
+                      visible="false"/>
+                
+                <Label fx:id="lblMensagemSucesso" 
+                      styleClass="success-label" 
+                      visible="false"/>
+                
+                <Button text="Salvar Turma" 
+                       onAction="#onSalvarTurma" 
+                       styleClass="button-success" 
+                       maxWidth="Infinity" 
+                       prefHeight="55"/>
+                
+                <Button text="Limpar" 
+                       onAction="#onLimpar" 
+                       styleClass="button-secondary" 
+                       maxWidth="Infinity" 
+                       prefHeight="50"/>
+                
+                <Button text="Voltar" 
+                       onAction="#onVoltar" 
+                       styleClass="button-secondary" 
+                       maxWidth="Infinity" 
+                       prefHeight="50"/>
+            </VBox>
+        </VBox>
+    </VBox>
 </StackPane>
