@@ -28,7 +28,6 @@
                        styleClass="menu-item,menu-item-active"
                        maxWidth="Infinity"/>
                 
-                <Label text="CADASTROS" styleClass="menu-section-title"/>
                 
                 <Button text="Professores" 
                        onAction="#onCadastrarProfessor"
@@ -65,17 +64,12 @@
                        styleClass="menu-item"
                        maxWidth="Infinity"/>
                 
-                <Label text="RELATORIOS" styleClass="menu-section-title"/>
-                
-                <Button text="Estatisticas" 
-                       onAction="#onEstatisticas"
+            
+                <Button text="Certificados" 
+                       onAction="#onCertificados"
                        styleClass="menu-item"
                        maxWidth="Infinity"/>
-                
-                <Button text="Relatorios" 
-                       onAction="#onRelatorios"
-                       styleClass="menu-item"
-                       maxWidth="Infinity"/>
+             
                 
                 <Region VBox.vgrow="ALWAYS"/>
                 

@@ -62,16 +62,12 @@ public class TelaInicialController {
     }
     
     @FXML
-    private void onEstatisticas(ActionEvent event) {
+    private void onCertificados(ActionEvent event) {
         System.out.println("Estatísticas - Em desenvolvimento");
         // TODO: Criar tela de estatísticas quando necessário
     }
     
-    @FXML
-    private void onRelatorios(ActionEvent event) {
-        System.out.println("Relatórios - Em desenvolvimento");
-        // TODO: Criar tela de relatórios quando necessário
-    }
+
     
     @FXML
     private void onVoltar(ActionEvent event) throws IOException {
