@@ -8,8 +8,6 @@
            prefWidth="1200" prefHeight="800"
            stylesheets="@../css/styles.css"
            styleClass="login-container">
-          
-
     
     <VBox alignment="CENTER" spacing="0">
         
@@ -18,7 +16,7 @@
             
             <!-- Cabeçalho -->
             <VBox alignment="CENTER" spacing="12">
-                <Label text="Bem-vindo!" styleClass="title"/>
+                <Label text="🎓 Bem-vindo!" styleClass="title"/>
                 <Label text="Entre com suas credenciais" styleClass="subtitle"/>
             </VBox>
             
@@ -30,7 +28,7 @@
                 
                 <!-- Campo Usuário -->
                 <VBox spacing="8">
-                    <Label text="Usuário" style="-fx-text-fill: #d4d4d8;"/>
+                    <Label text="👤 Usuário" style="-fx-text-fill: #d4d4d8;"/>
                     <TextField fx:id="txtUsuario"
                               promptText="Digite seu usuário"
                               styleClass="text-field"
@@ -39,40 +37,38 @@
                 
                 <!-- Campo Senha -->
                 <VBox spacing="8">
-                    <Label text="Senha" style="-fx-text-fill: #d4d4d8;"/>
+                    <Label text="🔒 Senha" style="-fx-text-fill: #d4d4d8;"/>
                     <PasswordField fx:id="txtSenha"
                                   promptText="Digite sua senha"
                                   styleClass="password-field"
                                   prefHeight="50"/>
                 </VBox>
                 
-                <!-- Label de Mensagem -->
+                <!-- 🔧 CORRIGIDO: Apenas UMA Label de mensagem -->
                 <Label fx:id="txtLabel"
                        styleClass="error-label"
                        visible="false"
-                       wrapText="true"/>
-                
-                <!-- Botão Entrar -->
-                <Button text="Entrar"
-                       onAction="#onEntrar"
-                       styleClass="button"
-                       maxWidth="Infinity"
-                       prefHeight="55"/>
-                
-                <!-- Separador -->
-                <Separator styleClass="separator"/>
-                <Label fx:id="txtLabel"
-                       text=""
-                       style="-fx-text-fill: #d4d4d8; -fx-font-size: 14px;"
                        wrapText="true"
                        alignment="CENTER"/>
                 
+                <!-- Botão Entrar -->
+                <Button text="🚀 Entrar"
+                       onAction="#onEntrar"
+                       styleClass="button"
+                       maxWidth="Infinity"
+                       prefHeight="55"
+                       minHeight="55"/>
+                
+                <!-- Separador -->
+                <Separator styleClass="separator"/>
+                
                 <!-- Botão Cadastrar -->
-                <Button text="Cadastrar-se"
+                <Button text="📝 Cadastrar-se"
                        onAction="#onTelaCadastro"
                        styleClass="button-secondary"
                        maxWidth="Infinity"
-                       prefHeight="50"/>
+                       prefHeight="50"
+                       minHeight="50"/>
                 
             </VBox>
         </VBox>

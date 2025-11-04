@@ -421,3 +421,100 @@ Label {
     -fx-font-size: 13px;
     -fx-text-fill: #737373;
 }
+/* ============================================
+   MENU ITEMS DA SIDEBAR COM ÍCONES
+   ============================================ */
+.menu-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: #a3a3a3;
+    -fx-font-size: 15px;
+    -fx-font-weight: 500;
+    -fx-padding: 15 25;
+    -fx-cursor: hand;
+    -fx-alignment: CENTER_LEFT;
+    -fx-background-radius: 0;
+    -fx-transition: all 0.3s ease;
+}
+
+.menu-item Label {
+    -fx-text-fill: inherit;
+}
+
+.menu-item:hover {
+    -fx-background-color: #1a1a1a;
+    -fx-text-fill: #ffffff;
+    -fx-scale-x: 1.02;
+}
+
+.menu-item:hover Label {
+    -fx-text-fill: #ffffff;
+}
+
+.menu-item:pressed {
+    -fx-background-color: #0f0f0f;
+}
+
+.menu-item-active {
+    -fx-background-color: #1a1a1a;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 0 0 0 3;
+}
+
+.menu-item-active Label {
+    -fx-text-fill: #ffffff;
+}
+/* ============================================
+   MENU ITEMS DA SIDEBAR COM ÍCONES
+   ============================================ */
+.menu-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: #a3a3a3;
+    -fx-font-size: 15px;
+    -fx-font-weight: 500;
+    -fx-padding: 15 25;
+    -fx-cursor: hand;
+    -fx-alignment: CENTER_LEFT;
+    -fx-background-radius: 0;
+    -fx-transition: all 0.3s ease;
+}
+
+.menu-item Label {
+    -fx-text-fill: inherit;
+}
+
+.menu-item .menu-icon {
+    -fx-fill: #a3a3a3;
+}
+
+.menu-item:hover {
+    -fx-background-color: #1a1a1a;
+    -fx-text-fill: #ffffff;
+}
+
+.menu-item:hover Label {
+    -fx-text-fill: #ffffff;
+}
+
+.menu-item:hover .menu-icon {
+    -fx-fill: #ffffff;
+}
+
+.menu-item:pressed {
+    -fx-background-color: #0f0f0f;
+}
+
+.menu-item-active {
+    -fx-background-color: #1a1a1a;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 0 0 0 3;
+}
+
+.menu-item-active Label {
+    -fx-text-fill: #ffffff;
+}
+
+.menu-item-active .menu-icon {
+    -fx-fill: #ffffff;
+}

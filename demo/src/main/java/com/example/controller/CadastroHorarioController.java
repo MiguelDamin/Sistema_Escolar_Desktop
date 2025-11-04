@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalTime;
 
+import com.example.model.Disciplina;
 import com.example.model.Horario;
 import com.example.model.PeriodoLetivo;
 import com.example.model.Professor;
 import com.example.model.Turma;
+import com.example.repository.DisciplinaDAO;
 import com.example.repository.HorarioDAO;
 import com.example.repository.PeriodoLetivoDAO;
 import com.example.repository.ProfessorDAO;
@@ -23,20 +25,25 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
  * Controller para a tela de Cadastro de Horários.
+ * ✅ ATUALIZADO: Agora inclui ComboBox de Disciplina, campos de Sala e Observações
  */
 public class CadastroHorarioController {
     
     @FXML private ComboBox<Turma> cbTurma;
     @FXML private ComboBox<Professor> cbProfessor;
     @FXML private ComboBox<PeriodoLetivo> cbPeriodoLetivo;
+    @FXML private ComboBox<Disciplina> cbDisciplina;  // ✅ NOVO
     @FXML private ComboBox<String> cbDiaSemana;
     @FXML private TextField txtHorarioInicio;
     @FXML private TextField txtHorarioFim;
+    @FXML private TextField txtSala;  // ✅ NOVO
+    @FXML private TextArea txtObservacoes;  // ✅ NOVO
     @FXML private Label lblMensagemErro;
     @FXML private Label lblMensagemSucesso;
     
@@ -44,10 +51,12 @@ public class CadastroHorarioController {
     private TurmaDAO turmaDAO = new TurmaDAO();
     private ProfessorDAO professorDAO = new ProfessorDAO();
     private PeriodoLetivoDAO periodoDAO = new PeriodoLetivoDAO();
+    private DisciplinaDAO disciplinaDAO = new DisciplinaDAO();  // ✅ NOVO
     
     private ObservableList<Turma> turmasDisponiveis = FXCollections.observableArrayList();
     private ObservableList<Professor> professoresDisponiveis = FXCollections.observableArrayList();
     private ObservableList<PeriodoLetivo> periodosDisponiveis = FXCollections.observableArrayList();
+    private ObservableList<Disciplina> disciplinasDisponiveis = FXCollections.observableArrayList();  // ✅ NOVO
     
     @FXML
     public void initialize() {
@@ -57,6 +66,7 @@ public class CadastroHorarioController {
         carregarTurmas();
         carregarProfessores();
         carregarPeriodosLetivos();
+        carregarDisciplinas();  // ✅ NOVO
         
         // Preencher dias da semana
         cbDiaSemana.setItems(FXCollections.observableArrayList(
@@ -103,6 +113,21 @@ public class CadastroHorarioController {
         }
     }
     
+    /**
+     * ✅ NOVO MÉTODO: Carrega as disciplinas do banco
+     */
+    private void carregarDisciplinas() {
+        try {
+            disciplinasDisponiveis.clear();
+            disciplinasDisponiveis.addAll(disciplinaDAO.listarTodos());
+            cbDisciplina.setItems(disciplinasDisponiveis);
+            System.out.println("✅ " + disciplinasDisponiveis.size() + " disciplinas carregadas!");
+        } catch (SQLException e) {
+            mostrarErro("Erro ao carregar disciplinas: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
     @FXML
     private void onSalvarHorario() {
         limparMensagens();
@@ -113,9 +138,12 @@ public class CadastroHorarioController {
             Turma turmaSelecionada = cbTurma.getValue();
             Professor professorSelecionado = cbProfessor.getValue();
             PeriodoLetivo periodoSelecionado = cbPeriodoLetivo.getValue();
+            Disciplina disciplinaSelecionada = cbDisciplina.getValue();  // ✅ NOVO
             String diaSemana = cbDiaSemana.getValue();
             String horaInicioStr = txtHorarioInicio.getText().trim();
             String horaFimStr = txtHorarioFim.getText().trim();
+            String sala = txtSala != null ? txtSala.getText().trim() : "";  // ✅ NOVO
+            String observacoes = txtObservacoes != null ? txtObservacoes.getText().trim() : "";  // ✅ NOVO
             
             if (turmaSelecionada == null) {
                 mostrarErro("Selecione uma turma!");
@@ -132,6 +160,13 @@ public class CadastroHorarioController {
             if (periodoSelecionado == null) {
                 mostrarErro("Selecione um período letivo!");
                 cbPeriodoLetivo.requestFocus();
+                return;
+            }
+            
+            // ✅ NOVA VALIDAÇÃO
+            if (disciplinaSelecionada == null) {
+                mostrarErro("Selecione uma disciplina!");
+                cbDisciplina.requestFocus();
                 return;
             }
             
@@ -178,9 +213,12 @@ public class CadastroHorarioController {
                 turmaSelecionada.getId_turma(),
                 professorSelecionado.getIdProfessor(),
                 periodoSelecionado.getId_periodo_letivo(),
+                disciplinaSelecionada.getId_disciplina(),  // ✅ NOVO
                 horaInicio,
                 horaFim,
-                diaSemana
+                diaSemana,
+                sala,  // ✅ NOVO
+                observacoes  // ✅ NOVO
             );
             
             int id = horarioDAO.salvar(novoHorario);
@@ -202,9 +240,12 @@ public class CadastroHorarioController {
         if (cbTurma != null) cbTurma.setValue(null);
         if (cbProfessor != null) cbProfessor.setValue(null);
         if (cbPeriodoLetivo != null) cbPeriodoLetivo.setValue(null);
+        if (cbDisciplina != null) cbDisciplina.setValue(null);  // ✅ NOVO
         if (cbDiaSemana != null) cbDiaSemana.setValue(null);
         if (txtHorarioInicio != null) txtHorarioInicio.clear();
         if (txtHorarioFim != null) txtHorarioFim.clear();
+        if (txtSala != null) txtSala.clear();  // ✅ NOVO
+        if (txtObservacoes != null) txtObservacoes.clear();  // ✅ NOVO
         limparMensagens();
     }
     

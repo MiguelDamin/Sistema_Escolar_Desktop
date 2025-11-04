@@ -8,8 +8,8 @@ import com.example.model.Responsavel;
 import com.example.model.Turma;
 import com.example.repository.EstudanteDAO;
 import com.example.repository.MatriculaDAO;
-import com.example.repository.TurmaDAO;
 import com.example.repository.ResponsavelDAO;
+import com.example.repository.TurmaDAO;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
