@@ -5,6 +5,7 @@ import java.net.URL;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -12,33 +13,62 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        // Caminho para o arquivo FXML
-        String fxmlPath = "/com/example/view/register.fxml";
-        URL fxmlUrl = App.class.getResource("/com/example/fxml/register.fxml");
+        try {
+            // 🔧 CORRIGIDO: Caminho consistente
+            String fxmlPath = "/com/example/fxml/register.fxml";
+            URL fxmlUrl = App.class.getResource(fxmlPath);
 
-        if (fxmlUrl == null) {
-            System.err.println("Não foi possível encontrar o arquivo FXML: " + fxmlPath);
-            return; // Encerra se o FXML não for encontrado
+            if (fxmlUrl == null) {
+                System.err.println("❌ ERRO: Arquivo FXML não encontrado: " + fxmlPath);
+                System.err.println("🔍 Verifique se o arquivo está em: src/main/resources" + fxmlPath);
+                return;
+            }
+
+            System.out.println("✅ FXML encontrado: " + fxmlUrl);
+
+            // Carrega o FXML
+            FXMLLoader fxmlLoader = new FXMLLoader(fxmlUrl);
+            Parent root = fxmlLoader.load();
+
+            // 🔧 CORRIGIDO: Deixa o tamanho ser definido pelo conteúdo
+            Scene scene = new Scene(root);
+
+            // 🔧 CORRIGIDO: Caminho correto do CSS
+            String cssPath = "/com/example/css/styles.css";
+            URL cssUrl = App.class.getResource(cssPath);
+            if (cssUrl != null) {
+                scene.getStylesheets().add(cssUrl.toExternalForm());
+                System.out.println("✅ CSS carregado: " + cssUrl);
+            } else {
+                System.err.println("⚠️ CSS NÃO ENCONTRADO: " + cssPath);
+                System.err.println("🔍 Verifique se o arquivo está em: src/main/resources" + cssPath);
+            }
+
+            // 🔧 CORRIGIDO: Configurações da janela
+            stage.setTitle("Sistema de Gestão Escolar - Login");
+            
+            // Define tamanhos ANTES de setScene
+            stage.setMinWidth(800);
+            stage.setMinHeight(600);
+            stage.setWidth(1200);
+            stage.setHeight(800);
+            
+            stage.setScene(scene);
+            stage.centerOnScreen();
+            stage.show();
+            
+            System.out.println("✅ Aplicação iniciada!");
+            System.out.println("📐 Tamanho: " + stage.getWidth() + "x" + stage.getHeight());
+
+        } catch (IOException e) {
+            System.err.println("❌ ERRO ao carregar:");
+            e.printStackTrace();
+            throw e;
         }
-
-        FXMLLoader fxmlLoader = new FXMLLoader(fxmlUrl);
-        Scene scene = new Scene(fxmlLoader.load(), 400, 400);
-
-        // Carrega e aplica o arquivo CSS à cena
-        String cssPath = "/com/example/style.css";
-        URL cssUrl = App.class.getResource(cssPath);
-        if (cssUrl != null) {
-            scene.getStylesheets().add(cssUrl.toExternalForm());
-        }
-
-        stage.setTitle("Cadastro de Usuário");
-        stage.setMinWidth(400); // Define uma largura mínima para a janela
-        stage.setMinHeight(400); // Define uma altura mínima para a janela
-        stage.setScene(scene);
-        stage.show();
     }
 
     public static void main(String[] args) {
-        launch(); // inicia o JavaFX
+        System.out.println("🚀 Iniciando Sistema...");
+        launch(args);
     }
 }
