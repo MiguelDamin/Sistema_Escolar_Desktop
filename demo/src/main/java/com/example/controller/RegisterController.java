@@ -1,5 +1,7 @@
 package com.example.controller;
+
 import java.io.IOException;
+import java.net.URL;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,11 +35,19 @@ private void onEntrar(ActionEvent event) throws IOException {
 
         // Troca a cena
         Scene scene = new Scene(novaCena);
+
+        // 🔧 CORRIGIDO: Aplicar CSS à nova cena
+        String cssPath = "/com/example/css/styles.css";
+        URL cssUrl = getClass().getResource(cssPath);
+        if (cssUrl != null) {
+            scene.getStylesheets().add(cssUrl.toExternalForm());
+        }
+
         stage.setScene(scene);
         stage.show();
 
     }
-   
+
 }
 @FXML
 private void onTelaCadastro(ActionEvent event) throws IOException {
