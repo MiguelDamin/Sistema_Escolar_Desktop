@@ -8,9 +8,7 @@
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.controller.TelaInicialController"
             stylesheets="@../css/styles.css"
-            styleClass="root"
-            prefWidth="1400"
-            prefHeight="900">
+            styleClass="root">
     
     <left>
         <VBox styleClass="sidebar" spacing="0">
