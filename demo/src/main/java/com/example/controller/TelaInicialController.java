@@ -80,6 +80,38 @@ public class TelaInicialController {
             e.printStackTrace();
         }
     }
+       @FXML
+    private void onCadastrarCurso2(MouseEvent event) {
+        try {
+            carregarCenaComRedimensionamento("/com/example/fxml/CadastroCurso.fxml", event);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+       @FXML
+    private void onCadastrarProfessor2(MouseEvent event) {
+        try {
+            carregarCenaComRedimensionamento("/com/example/fxml/CadastroProfessor.fxml", event);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+       @FXML
+    private void onCadastrarAluno2(MouseEvent event) {
+        try {
+            carregarCenaComRedimensionamento("/com/example/fxml/CadastroAluno.fxml", event);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+       @FXML
+    private void onCadastrarTurma2(MouseEvent event) {
+        try {
+            carregarCenaComRedimensionamento("/com/example/fxml/CadastroTurma.fxml", event);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     
     @FXML
     private void onCertificados(MouseEvent event) {

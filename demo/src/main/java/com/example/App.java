@@ -1,3 +1,8 @@
+package com.example;
+
+import java.io.IOException;
+import java.net.URL;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,35 +14,38 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         // Caminho para o arquivo FXML
-        String fxmlPath = "/com/example/view/register.fxml";
-        URL fxmlUrl = App.class.getResource(fxmlPath);
+        String fxmlPath = "/com/example/fxml/register.fxml";
+        URL fxmlUrl = getClass().getResource(fxmlPath);
         
         if (fxmlUrl == null) {
             System.err.println("Não foi possível encontrar o arquivo FXML: " + fxmlPath);
-            return; // Encerra se o FXML não for encontrado
+            return;
         }
 
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlUrl);
-        Scene scene = new Scene(fxmlLoader.load(), 400, 400);
+        Parent root = fxmlLoader.load();
         
-        // Carrega a antiga o arquivo CSS à cena
-        String cssPath = "/com/example/style/styles.css";
-        URL cssUrl = App.class.getResource(cssPath);
+        // Caminho correto para o CSS
+        String cssPath = "/com/example/css/styles.css";
+        URL cssUrl = getClass().getResource(cssPath);
+        
+        Scene scene = new Scene(root, 1200, 800);
+        
         if (cssUrl != null) {
             scene.getStylesheets().add(cssUrl.toExternalForm());
+        } else {
+            System.err.println("Aviso: CSS não encontrado em: " + cssPath);
         }
 
-        stage.setTitle("Cadastro de usuário");
-        stage.setMinWidth(800); // Define uma largura mínima para a janela
-        stage.setMinHeight(600); // Define uma altura mínima para a janela
-        stage.setWidth(1200);
-        stage.setHeight(600);
+        stage.setTitle("Sistema de Gestão Escolar - Login");
+        stage.setMinWidth(800);
+        stage.setMinHeight(600);
         stage.setScene(scene);
         stage.centerOnScreen();
         stage.show();
     }
 
     public static void main(String[] args) {
-        launch(); // Inicia o JavaFX
+        launch(args);
     }
 }
