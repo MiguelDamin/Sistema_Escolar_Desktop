@@ -236,7 +236,7 @@
                         
                         <GridPane hgap="15" vgap="15">
                             <Button text="Novo Aluno" 
-                                   onAction="#onCadastrarAluno"
+                                   onMouseClicked="#onCadastrarAluno2"
                                    styleClass="button-primary"
                                    prefWidth="200"
                                    prefHeight="50"
@@ -248,7 +248,7 @@
                             </Button>
                             
                             <Button text="Novo Professor" 
-                                   onAction="#onCadastrarProfessor"
+                                   onMouseClicked="#onCadastrarProfessor2"
                                    styleClass="button-primary"
                                    prefWidth="200"
                                    prefHeight="50"
@@ -260,7 +260,7 @@
                             </Button>
                             
                             <Button text="Novo Curso" 
-                                   onAction="#onCadastrarCurso"
+                                   onMouseClicked="#onCadastrarCurso2"
                                    styleClass="button-primary"
                                    prefWidth="200"
                                    prefHeight="50"
@@ -272,7 +272,7 @@
                             </Button>
                             
                             <Button text="Nova Turma" 
-                                   onAction="#onCadastrarTurma"
+                                   onMouseClicked="#onCadastrarTurma2"
                                    styleClass="button-primary"
                                    prefWidth="200"
                                    prefHeight="50"

@@ -14,7 +14,7 @@
             <VBox styleClass="card" spacing="25" maxWidth="650">
                 
                 <VBox spacing="8">
-                    <Label text="👨‍🎓 Cadastro de Aluno" styleClass="title"/>
+                    <Label text="Cadastro de Aluno" styleClass="title"/>
                     <Label text="Preencha os dados abaixo" styleClass="subtitle"/>
                 </VBox>
                 
@@ -23,37 +23,37 @@
                 <!-- DADOS DO ALUNO -->
                 <VBox spacing="20">
                     <VBox spacing="8">
-                        <Label text="📝 Nome do Aluno"/>
+                        <Label text="Nome do Aluno"/>
                         <TextField fx:id="txtNome" promptText="Digite o nome completo" prefHeight="50" minHeight="50"/>
                     </VBox>
                     
                     <VBox spacing="8">
-                        <Label text="🎂 Idade"/>
+                        <Label text="Idade"/>
                         <TextField fx:id="txtIdade" promptText="Digite a idade" prefHeight="50" minHeight="50"/>
                     </VBox>
                     
                     <VBox spacing="8">
-                        <Label text="🆔 CPF"/>
+                        <Label text="CPF"/>
                         <TextField fx:id="txtCpf" promptText="Digite o CPF (somente números)" prefHeight="50" minHeight="50"/>
                     </VBox>
                     
                     <VBox spacing="8">
-                        <Label text="📧 Email"/>
+                        <Label text="Email"/>
                         <TextField fx:id="txtEmail" promptText="email@exemplo.com" prefHeight="50" minHeight="50"/>
                     </VBox>
                     
                     <VBox spacing="8">
-                        <Label text="📱 Telefone"/>
+                        <Label text="Telefone"/>
                         <TextField fx:id="txtTelefone" promptText="(00) 00000-0000" prefHeight="50" minHeight="50"/>
                     </VBox>
                     
                     <VBox spacing="8">
-                        <Label text="📅 Data de Nascimento"/>
+                        <Label text="Data de Nascimento"/>
                         <DatePicker fx:id="dtDataNascimento" promptText="Selecione a data" prefHeight="50" minHeight="50" maxWidth="Infinity"/>
                     </VBox>
                     
                     <VBox spacing="8">
-                        <Label text="🏫 Turma"/>
+                        <Label text="Turma"/>
                         <ComboBox fx:id="cbTurma" promptText="Selecione a turma" maxWidth="Infinity" prefHeight="50" minHeight="50"/>
                     </VBox>
                 </VBox>
@@ -62,35 +62,35 @@
                 
                 <!-- DADOS DO RESPONSÁVEL -->
                 <VBox spacing="20">
-                    <Label text="👨‍👩‍👧 Dados do Responsável" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    <Label text="Dados do Responsável" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
                     
                     <VBox spacing="8">
-                        <Label text="📝 Nome do Responsável"/>
+                        <Label text="Nome do Responsável"/>
                         <TextField fx:id="txtNomeResponsavel" promptText="Digite o nome completo" prefHeight="50" minHeight="50"/>
                     </VBox>
                     
                     <VBox spacing="8">
-                        <Label text="🆔 CPF do Responsável"/>
+                        <Label text="CPF do Responsável"/>
                         <TextField fx:id="txtCpfResponsavel" promptText="Digite o CPF (somente números)" prefHeight="50" minHeight="50"/>
                     </VBox>
                     
                     <VBox spacing="8">
-                        <Label text="📱 Telefone do Responsável"/>
+                        <Label text="Telefone do Responsável"/>
                         <TextField fx:id="txtTelefoneResponsavel" promptText="(00) 00000-0000" prefHeight="50" minHeight="50"/>
                     </VBox>
                     
                     <VBox spacing="8">
-                        <Label text="📧 Email do Responsável"/>
+                        <Label text="Email do Responsável"/>
                         <TextField fx:id="txtEmailResponsavel" promptText="exemplo@email.com" prefHeight="50" minHeight="50"/>
                     </VBox>
                     
                     <VBox spacing="8">
-                        <Label text="🏠 Endereço"/>
+                        <Label text="Endereço"/>
                         <TextField fx:id="txtEnderecoResponsavel" promptText="Rua, número, bairro, cidade" prefHeight="50" minHeight="50"/>
                     </VBox>
                     
                     <VBox spacing="8">
-                        <Label text="👨‍👩‍👧‍👦 Parentesco"/>
+                        <Label text="Parentesco"/>
                         <ComboBox fx:id="cbParentesco" promptText="Selecione o parentesco" maxWidth="Infinity" prefHeight="50" minHeight="50"/>
                     </VBox>
                 </VBox>
@@ -102,9 +102,9 @@
                 <Label fx:id="print" styleClass="success-label" visible="false" wrapText="true"/>
                 
                 <HBox spacing="15" alignment="CENTER">
-                    <Button text="🗑️ Limpar" onAction="#onLimpar" styleClass="button-secondary" prefWidth="180" prefHeight="50" minHeight="50"/>
-                    <Button text="💾 Salvar" onAction="#onSalvar" styleClass="button-success" prefWidth="180" prefHeight="50" minHeight="50"/>
-                    <Button text="◀️ Voltar" onAction="#onVoltar" styleClass="button-secondary" prefWidth="180" prefHeight="50" minHeight="50"/>
+                    <Button text="Limpar" onAction="#onLimpar" styleClass="button-secondary" prefWidth="180" prefHeight="50" minHeight="50"/>
+                    <Button text="Salvar" onAction="#onSalvar" styleClass="button-success" prefWidth="180" prefHeight="50" minHeight="50"/>
+                    <Button text="Voltar" onAction="#onVoltar" styleClass="button-secondary" prefWidth="180" prefHeight="50" minHeight="50"/>
                 </HBox>
             </VBox>
         </VBox>

@@ -79,22 +79,7 @@
                         </VBox>
                     </HBox>
                     
-                    <!-- ✅ NOVO CAMPO: Sala -->
-                    <VBox spacing="8">
-                        <Label text="Sala (Opcional)"/>
-                        <TextField fx:id="txtSala" 
-                                  promptText="Ex: Sala 101, Lab. Informática" 
-                                  prefHeight="50"/>
-                    </VBox>
-                    
-                    <!-- ✅ NOVO CAMPO: Observações -->
-                    <VBox spacing="8">
-                        <Label text="Observações (Opcional)"/>
-                        <TextArea fx:id="txtObservacoes" 
-                                 promptText="Digite observações sobre o horário (ex: aula prática, trazer materiais...)" 
-                                 prefHeight="100"
-                                 wrapText="true"/>
-                    </VBox>
+
                     
                 </VBox>
                 
