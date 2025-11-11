@@ -16,7 +16,7 @@
             
             <!-- Cabeçalho -->
             <VBox alignment="CENTER" spacing="12">
-                <Label text="🎓 Bem-vindo!" styleClass="title"/>
+                <Label text="🎓Bem-vindo!" styleClass="title"/>
                 <Label text="Entre com suas credenciais" styleClass="subtitle"/>
             </VBox>
             
@@ -28,7 +28,7 @@
                 
                 <!-- Campo Usuário -->
                 <VBox spacing="8">
-                    <Label text="👤 Usuário" style="-fx-text-fill: #d4d4d8;"/>
+                    <Label text="Usuário" style="-fx-text-fill: #d4d4d8;"/>
                     <TextField fx:id="txtUsuario"
                               promptText="Digite seu usuário"
                               styleClass="text-field"
@@ -37,7 +37,7 @@
                 
                 <!-- Campo Senha -->
                 <VBox spacing="8">
-                    <Label text="🔒 Senha" style="-fx-text-fill: #d4d4d8;"/>
+                    <Label text="Senha" style="-fx-text-fill: #d4d4d8;"/>
                     <PasswordField fx:id="txtSenha"
                                   promptText="Digite sua senha"
                                   styleClass="password-field"
@@ -52,7 +52,7 @@
                        alignment="CENTER"/>
                 
                 <!-- Botão Entrar -->
-                <Button text="🚀 Entrar"
+                <Button text="Entrar"
                        onAction="#onEntrar"
                        styleClass="button"
                        maxWidth="Infinity"
@@ -63,7 +63,7 @@
                 <Separator styleClass="separator"/>
                 
                 <!-- Botão Cadastrar -->
-                <Button text="📝 Cadastrar-se"
+                <Button text="Cadastrar-se"
                        onAction="#onTelaCadastro"
                        styleClass="button-secondary"
                        maxWidth="Infinity"

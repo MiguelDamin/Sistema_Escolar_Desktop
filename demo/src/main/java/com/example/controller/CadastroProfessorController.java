@@ -3,6 +3,7 @@ package com.example.controller;
 import java.io.IOException;
 
 import com.example.model.Professor;
+import com.example.repository.AtividadeRecenteDAO;
 import com.example.repository.ProfessorDAO;
 
 import javafx.application.Platform;
@@ -23,12 +24,14 @@ public class CadastroProfessorController {
     @FXML private TextField txtCpfProfessor;
     @FXML private TextField txtEmailProfessor;
     @FXML private TextField txtTelefoneProfessor;
-    @FXML private Label LabelProfessor; // Se seu FXML usa outro id, ajuste aqui
+    @FXML private Label LabelProfessor;
+    
+    // DAOs
+    private ProfessorDAO professorDAO = new ProfessorDAO();
+    private AtividadeRecenteDAO atividadeDAO = new AtividadeRecenteDAO(); // ADICIONADO
 
-    // Chamado automaticamente pelo JavaFX (nome correto)
     @FXML
     public void initialize(){
-        // Limita CPF e Telefone a 11 caracteres (você pode ajustar a regra)
         txtCpfProfessor.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && newValue.length() > 11) {
                 txtCpfProfessor.setText(oldValue);
@@ -41,25 +44,21 @@ public class CadastroProfessorController {
             }
         });
 
-        // Esconde a label inicialmente
         if (LabelProfessor != null) {
             LabelProfessor.setVisible(false);
         }
     }
 
-    // Método chamado pelo botão "Salvar" (ligue onAction no FXML)
     @FXML
     private void onSalvarProfessor(ActionEvent event){
-        // ler e trim para evitar espaços
         String nome = txtNomeProfessor.getText() != null ? txtNomeProfessor.getText().trim() : "";
         String idadeTxt = txtIdadeProfessor.getText() != null ? txtIdadeProfessor.getText().trim() : "";
         String cpf = txtCpfProfessor.getText() != null ? txtCpfProfessor.getText().trim() : "";
         String email = txtEmailProfessor.getText() != null ? txtEmailProfessor.getText().trim() : "";
         String telefone = txtTelefoneProfessor.getText() != null ? txtTelefoneProfessor.getText().trim() : "";
 
-        // validações básicas
         if (nome.isBlank() || idadeTxt.isBlank() || cpf.isBlank() || email.isBlank() || telefone.isBlank()) {
-            showMessage("Erro: Todos os campos são obrigatórios");
+            showMessage("Erro: Todos os campos sao obrigatorios");
             return;
         }
 
@@ -67,29 +66,29 @@ public class CadastroProfessorController {
         try {
             idade = Integer.parseInt(idadeTxt);
             if (idade <= 0) {
-                showMessage("Erro: Idade inválida");
+                showMessage("Erro: Idade invalida");
                 return;
             }
         } catch (NumberFormatException e) {
-            showMessage("Erro: Idade deve ser um número inteiro");
+            showMessage("Erro: Idade deve ser um numero inteiro");
             return;
         }
 
-        // Criar objeto Professor
         Professor professor = new Professor(nome, idade, cpf, email, telefone);
 
-        // Executa inserção em background para não travar a UI
         Task<Boolean> salvarTask = new Task<>() {
             @Override
             protected Boolean call() {
-                ProfessorDAO dao = new ProfessorDAO();
-                return dao.salvar(professor); // seu DAO fecha conexões no finally
+                return professorDAO.salvar(professor);
             }
         };
 
         salvarTask.setOnSucceeded(workerStateEvent -> {
             boolean sucesso = salvarTask.getValue();
             if (sucesso) {
+                // REGISTRAR ATIVIDADE APOS SUCESSO
+                atividadeDAO.registrar("PROFESSOR", "Professor cadastrado: " + nome);
+                
                 showMessage("Professor salvo com sucesso!");
                 clearFields();
             } else {
@@ -103,22 +102,19 @@ public class CadastroProfessorController {
             showMessage("Erro inesperado ao salvar: " + (ex != null ? ex.getMessage() : ""));
         });
 
-        // iniciar a thread
         new Thread(salvarTask).start();
     }
 
-    // Botão Voltar (mantive seu comportamento)
     @FXML
     private void onVoltar(ActionEvent event) throws IOException {
         Parent novaCena = FXMLLoader.load(getClass().getResource("/com/example/fxml/Telainicial.fxml"));
-
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(novaCena);
         stage.setScene(scene);
         stage.show();
     }
 
-     @FXML
+    @FXML
     private void onLimpar(){
         clearFields();
         if (LabelProfessor != null) {
@@ -126,7 +122,6 @@ public class CadastroProfessorController {
         }
     }
 
-    // --- métodos auxiliares ---
     private void clearFields() {
         Platform.runLater(() -> {
             txtNomeProfessor.clear();
@@ -138,7 +133,6 @@ public class CadastroProfessorController {
     }
 
     private void showMessage(String msg) {
-        // Atualiza a label na JavaFX Application Thread
         Platform.runLater(() -> {
             if (LabelProfessor != null) {
                 LabelProfessor.setText(msg);

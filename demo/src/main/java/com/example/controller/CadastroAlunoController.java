@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import com.example.model.Estudante;
 import com.example.model.Responsavel;
 import com.example.model.Turma;
+import com.example.repository.AtividadeRecenteDAO;
 import com.example.repository.EstudanteDAO;
 import com.example.repository.MatriculaDAO;
 import com.example.repository.ResponsavelDAO;
@@ -34,36 +35,37 @@ public class CadastroAlunoController {
     @FXML private TextField txtCpf;
     @FXML private TextField txtEmail;
     @FXML private TextField txtTelefone;
-    @FXML private DatePicker dtDataNascimento;  // ← ADICIONAR NO FXML
-    @FXML private ComboBox<Turma> cbTurma; // ALTERADO PARA USAR O MODEL TURMA
+    @FXML private DatePicker dtDataNascimento;
+    @FXML private ComboBox<Turma> cbTurma;
     
-    // CAMPOS DO RESPONSÁVEL
+    // CAMPOS DO RESPONSAVEL
     @FXML private TextField txtNomeResponsavel;
     @FXML private TextField txtCpfResponsavel;
     @FXML private TextField txtTelefoneResponsavel;
     @FXML private TextField txtEmailResponsavel;
     @FXML private TextField txtEnderecoResponsavel;
-    @FXML private ComboBox<String> cbParentesco;  // ← ADICIONAR NO FXML
+    @FXML private ComboBox<String> cbParentesco;
     
     @FXML private Label lblMensagem;
     @FXML private Label print;
     
+    // DAOs - TODOS DECLARADOS AQUI NO TOPO
     private ResponsavelDAO responsavelDAO = new ResponsavelDAO();
     private EstudanteDAO estudanteDAO = new EstudanteDAO();
     private MatriculaDAO matriculaDAO = new MatriculaDAO();
-    private TurmaDAO turmaDAO = new TurmaDAO(); // NOVO DAO
+    private TurmaDAO turmaDAO = new TurmaDAO();
+    private AtividadeRecenteDAO atividadeDAO = new AtividadeRecenteDAO(); // ADICIONADO
+    
     private ObservableList<Turma> turmasCadastradas = FXCollections.observableArrayList();
     
     @FXML
     public void initialize() {
         System.out.println("Controller carregado com sucesso!");
         
-        // Preencher ComboBox de turmas com dados do banco
         carregarTurmas();
         
-        // Preencher ComboBox de parentesco
         cbParentesco.setItems(FXCollections.observableArrayList(
-            "Pai", "Mãe", "Avô", "Avó", "Tio", "Tia", "Tutor Legal", "Outro"
+            "Pai", "Mae", "Avo", "Ava", "Tio", "Tia", "Tutor Legal", "Outro"
         ));
         
         // Limitar CPF do aluno a 11 caracteres
@@ -80,30 +82,30 @@ public class CadastroAlunoController {
             }
         });
         
-        // Limitar CPF do responsável a 11 caracteres
+        // Limitar CPF do responsavel a 11 caracteres
         txtCpfResponsavel.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.length() > 11) {
                 txtCpfResponsavel.setText(oldValue);
             }
         });
         
-        // Limitar telefone do responsável a 11 caracteres
+        // Limitar telefone do responsavel a 11 caracteres
         txtTelefoneResponsavel.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.length() > 11) {
                 txtTelefoneResponsavel.setText(oldValue);
             }
         });
     }
+    
     @FXML
     private void onSalvar() {
         try {
-            // VALIDAÇÕES BÁSICAS
+            // VALIDACOES BASICAS
             if (txtNome == null || txtNome.getText().trim().isEmpty()) {
                 showAlert(Alert.AlertType.ERROR, "Erro", "Digite o nome do aluno!");
                 return;
             }
             
-            // NOVA VALIDAÇÃO: Seleção de Turma
             Turma turmaSelecionada = cbTurma.getValue();
             if (turmaSelecionada == null) {
                 showAlert(Alert.AlertType.ERROR, "Erro", "Selecione a turma do aluno!");
@@ -126,12 +128,12 @@ public class CadastroAlunoController {
             }
             
             if (txtNomeResponsavel == null || txtNomeResponsavel.getText().trim().isEmpty()) {
-                showAlert(Alert.AlertType.ERROR, "Erro", "Digite o nome do responsável!");
+                showAlert(Alert.AlertType.ERROR, "Erro", "Digite o nome do responsavel!");
                 return;
             }
             
             if (txtCpfResponsavel == null || txtCpfResponsavel.getText().trim().isEmpty()) {
-                showAlert(Alert.AlertType.ERROR, "Erro", "Digite o CPF do responsável!");
+                showAlert(Alert.AlertType.ERROR, "Erro", "Digite o CPF do responsavel!");
                 return;
             }
             
@@ -140,7 +142,7 @@ public class CadastroAlunoController {
                 return;
             }
             
-            // 1️⃣ CRIAR OBJETO RESPONSÁVEL
+            // CRIAR OBJETO RESPONSAVEL
             Responsavel responsavel = new Responsavel(
                 txtNomeResponsavel.getText().trim(),
                 txtCpfResponsavel.getText().trim(),
@@ -150,11 +152,11 @@ public class CadastroAlunoController {
                 cbParentesco.getValue()
             );
             
-            // 2️⃣ SALVAR RESPONSÁVEL E PEGAR O ID
+            // SALVAR RESPONSAVEL E PEGAR O ID
             int idResponsavel = responsavelDAO.salvar(responsavel);
-            System.out.println("Responsável salvo com ID: " + idResponsavel);
+            System.out.println("Responsavel salvo com ID: " + idResponsavel);
             
-            // 3️⃣ CRIAR OBJETO ESTUDANTE COM O ID DO RESPONSÁVEL
+            // CRIAR OBJETO ESTUDANTE COM O ID DO RESPONSAVEL
             Estudante estudante = new Estudante(
                 txtNome.getText().trim(),
                 Integer.parseInt(txtIdade.getText().trim()),
@@ -165,23 +167,26 @@ public class CadastroAlunoController {
                 idResponsavel
             );
             
-            // 4️⃣ SALVAR ESTUDANTE E OBTER O ID GERADO
+            // SALVAR ESTUDANTE E OBTER O ID GERADO
             int idEstudante = estudanteDAO.salvar(estudante);
             System.out.println("Estudante salvo com ID: " + idEstudante);
             
-            // 5️⃣ REGISTRAR MATRÍCULA
-            // Pega o ID da Turma selecionada
+            // REGISTRAR MATRICULA
             int idTurma = turmaSelecionada.getId_turma(); 
+            int idMatricula = matriculaDAO.salvar(idEstudante, idTurma);
+            System.out.println("Matricula registrada com ID: " + idMatricula + " na Turma ID: " + idTurma);
             
-            int idMatricula = matriculaDAO.salvar(idEstudante, idTurma); // Passa o idTurma
-            System.out.println("Matrícula registrada com ID: " + idMatricula + " na Turma ID: " + idTurma);
+            // REGISTRAR ATIVIDADE RECENTE - AQUI, APOS TUDO DAR CERTO
+            String nomeAluno = txtNome.getText().trim();
+            String nomeTurma = turmaSelecionada.getNome();
+            atividadeDAO.registrar("ALUNO", "Novo aluno matriculado: " + nomeAluno + " - Turma " + nomeTurma);
             
             // SUCESSO!
-            showAlert(Alert.AlertType.INFORMATION, "Sucesso", "Aluno, Responsável e Matrícula cadastrados com sucesso!");
+            showAlert(Alert.AlertType.INFORMATION, "Sucesso", "Aluno, Responsavel e Matricula cadastrados com sucesso!");
             onLimpar();
             
         } catch (NumberFormatException e) {
-            showAlert(Alert.AlertType.ERROR, "Erro", "A idade deve ser um número válido!");
+            showAlert(Alert.AlertType.ERROR, "Erro", "A idade deve ser um numero valido!");
             e.printStackTrace();
         } catch (SQLException e) {
             showAlert(Alert.AlertType.ERROR, "Erro", "Erro ao salvar no banco de dados: " + e.getMessage());
@@ -194,7 +199,6 @@ public class CadastroAlunoController {
     
     @FXML
     private void onLimpar() {
-        // Limpar campos do aluno
         txtNome.clear();
         txtIdade.clear();
         txtCpf.clear();
@@ -203,7 +207,6 @@ public class CadastroAlunoController {
         dtDataNascimento.setValue(null);
         cbTurma.setValue(null);
         
-        // Limpar campos do responsável
         txtNomeResponsavel.clear();
         txtCpfResponsavel.clear();
         txtTelefoneResponsavel.clear();
@@ -229,16 +232,13 @@ public class CadastroAlunoController {
         alert.showAndWait();
     }
     
-    /**
-     * Carrega as turmas do banco de dados e preenche o ComboBox.
-     */
     private void carregarTurmas() {
         try {
             turmasCadastradas.clear();
             turmasCadastradas.addAll(turmaDAO.listarTodos());
             cbTurma.setItems(turmasCadastradas);
         } catch (SQLException e) {
-            showAlert(Alert.AlertType.ERROR, "Erro de Banco de Dados", "Não foi possível carregar as turmas: " + e.getMessage());
+            showAlert(Alert.AlertType.ERROR, "Erro de Banco de Dados", "Nao foi possivel carregar as turmas: " + e.getMessage());
             e.printStackTrace();
         }
     }

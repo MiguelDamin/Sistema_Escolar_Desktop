@@ -287,47 +287,18 @@
                     
                     <!-- Atividades Recentes -->
                     <VBox styleClass="form-card" spacing="20">
-                        <HBox alignment="CENTER_LEFT" spacing="10">
-                            <FontAwesomeIconView glyphName="HISTORY" size="24" fill="#ffffff"/>
-                            <Label text="Atividades Recentes" styleClass="page-title" 
-                                  style="-fx-font-size: 22px;"/>
-                        </HBox>
-                        
-                        <Separator styleClass="separator"/>
-                        
-                        <VBox spacing="15">
-                            <HBox spacing="15" alignment="CENTER_LEFT" 
-                                 style="-fx-padding: 12; -fx-background-color: #0a0a0a; -fx-background-radius: 8;">
-                                <FontAwesomeIconView glyphName="CHECK_CIRCLE" size="24" fill="#4ade80"/>
-                                <VBox>
-                                    <Label text="Novo aluno matriculado" style="-fx-font-weight: 600;"/>
-                                    <Label text="João Silva - Turma A" styleClass="label-secondary"/>
-                                </VBox>
-                                <Region HBox.hgrow="ALWAYS"/>
-                                <Label text="2 horas atrás" styleClass="label-secondary"/>
-                            </HBox>
-                            
-                            <HBox spacing="15" alignment="CENTER_LEFT" 
-                                 style="-fx-padding: 12; -fx-background-color: #0a0a0a; -fx-background-radius: 8;">
-                                <FontAwesomeIconView glyphName="USER_PLUS" size="24" fill="#60a5fa"/>
-                                <VBox>
-                                    <Label text="Professor cadastrado" style="-fx-font-weight: 600;"/>
-                                    <Label text="Maria Santos - Matemática" styleClass="label-secondary"/>
-                                </VBox>
-                                <Region HBox.hgrow="ALWAYS"/>
-                                <Label text="5 horas atrás" styleClass="label-secondary"/>
-                            </HBox>
-                            
-                            <HBox spacing="15" alignment="CENTER_LEFT" 
-                                 style="-fx-padding: 12; -fx-background-color: #0a0a0a; -fx-background-radius: 8;">
-                                <FontAwesomeIconView glyphName="STAR" size="24" fill="#fbbf24"/>
-                                <VBox>
-                                    <Label text="Novo curso criado" style="-fx-font-weight: 600;"/>
-                                    <Label text="Engenharia de Software" styleClass="label-secondary"/>
-                                </VBox>
-                                <Region HBox.hgrow="ALWAYS"/>
-                                <Label text="1 dia atrás" styleClass="label-secondary"/>
-                            </HBox>
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label text="Atividades Recentes" styleClass="page-title"/>
+                </HBox>
+                
+                <Separator styleClass="separator"/>
+                
+                <!-- ADICIONE fx:id AQUI -->
+                <VBox fx:id="vboxAtividades" spacing="15">
+                    <!-- As atividades serão adicionadas aqui dinamicamente -->
+                </VBox>
+            </VBox>
+                                    
                         </VBox>
                     </VBox>
                 </VBox>
