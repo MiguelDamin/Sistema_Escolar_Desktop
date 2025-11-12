@@ -2,7 +2,9 @@ module com.example {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
-    // FontAwesome será carregado como biblioteca não-modular (automatic module)
+    
+    // ✅ ADICIONE ESTA LINHA PARA FONTAWESOME
+    requires de.jensd.fx.glyphs.fontawesome;
     
     opens com.example to javafx.fxml;
     opens com.example.controller to javafx.fxml;
