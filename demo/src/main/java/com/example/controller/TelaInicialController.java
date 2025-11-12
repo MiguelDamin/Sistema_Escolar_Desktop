@@ -6,6 +6,8 @@ import java.util.List;
 import com.example.model.AtividadeRecente;
 import com.example.repository.AtividadeRecenteDAO;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +25,7 @@ import javafx.stage.Stage;
 
 public class TelaInicialController {
     
-    @FXML private VBox vboxAtividades; // Adicione fx:id="vboxAtividades" no FXML
+    @FXML private VBox vboxAtividades;
     
     private AtividadeRecenteDAO atividadeDAO = new AtividadeRecenteDAO();
     
@@ -136,6 +138,14 @@ public class TelaInicialController {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void onCadastrarNotas(MouseEvent event) {
+        try {
+            carregarCenaComRedimensionamento("/com/example/fxml/CadastroNota.fxml", event);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     
     @FXML
     private void onCertificados(MouseEvent event) {
@@ -151,7 +161,7 @@ public class TelaInicialController {
             return;
         }
         
-        List<AtividadeRecente> atividades = atividadeDAO.listarRecentes(3);
+        List<AtividadeRecente> atividades = atividadeDAO.listarRecentes(5);
         
         vboxAtividades.getChildren().clear();
         
@@ -169,24 +179,25 @@ public class TelaInicialController {
     }
     
     /**
-     * Cria um item visual de atividade (SEM FontAwesome)
+     * Cria um item visual de atividade COM FontAwesome
      */
     private HBox criarItemAtividade(AtividadeRecente atividade) {
         HBox hbox = new HBox(15);
         hbox.setAlignment(Pos.CENTER_LEFT);
         hbox.setStyle("-fx-padding: 12; -fx-background-color: #0a0a0a; -fx-background-radius: 8;");
         
-        // Emoji/Icone como texto simples
-        Label lblIcone = new Label(getEmoji(atividade.getTipo()));
-        lblIcone.setStyle("-fx-font-size: 24px;");
+        // ✅ ÍCONE COM FONTAWESOME
+        FontAwesomeIconView icone = new FontAwesomeIconView(getIconeFontAwesome(atividade.getTipo()));
+        icone.setSize("28");
+        icone.setFill(javafx.scene.paint.Color.web(getCor(atividade.getTipo())));
         
-        // Descricao
+        // Descrição
         VBox vboxTexto = new VBox(2);
         Label lblDescricao = new Label(atividade.getDescricao());
-        lblDescricao.setStyle("-fx-font-weight: 600; -fx-text-fill: white;");
+        lblDescricao.setStyle("-fx-font-weight: 600; -fx-text-fill: white; -fx-font-size: 14px;");
         
         Label lblTipo = new Label(atividade.getTipo());
-        lblTipo.setStyle("-fx-text-fill: #737373; -fx-font-size: 11px;");
+        lblTipo.setStyle("-fx-text-fill: #737373; -fx-font-size: 11px; -fx-font-weight: 500;");
         
         vboxTexto.getChildren().addAll(lblDescricao, lblTipo);
         
@@ -198,21 +209,44 @@ public class TelaInicialController {
         Label lblTempo = new Label(atividade.getTempoDecorrido());
         lblTempo.setStyle("-fx-text-fill: #737373; -fx-font-size: 12px;");
         
-        hbox.getChildren().addAll(lblIcone, vboxTexto, spacer, lblTempo);
+        hbox.getChildren().addAll(icone, vboxTexto, spacer, lblTempo);
         
         return hbox;
     }
     
     /**
-     * Retorna emoji baseado no tipo
+     * Retorna o ícone FontAwesome baseado no tipo
      */
-    private String getEmoji(String tipo) {
+    private FontAwesomeIcon getIconeFontAwesome(String tipo) {
         switch (tipo) {
-            case "ALUNO": return "👨‍🎓";
-            case "PROFESSOR": return "👨‍🏫";
-            case "CURSO": return "📚";
-            case "TURMA": return "🏫";
-            default: return "ℹ️";
+            case "ALUNO":
+                return FontAwesomeIcon.USER_PLUS;
+            case "PROFESSOR":
+                return FontAwesomeIcon.USER;
+            case "CURSO":
+                return FontAwesomeIcon.BOOK;
+            case "TURMA":
+                return FontAwesomeIcon.USERS;
+            default:
+                return FontAwesomeIcon.INFO_CIRCLE;
+        }
+    }
+    
+    /**
+     * Retorna a cor baseada no tipo (em formato hexadecimal)
+     */
+    private String getCor(String tipo) {
+        switch (tipo) {
+            case "ALUNO":
+                return "#4ade80";  // Verde
+            case "PROFESSOR":
+                return "#60a5fa";  // Azul
+            case "CURSO":
+                return "#fbbf24";  // Amarelo
+            case "TURMA":
+                return "#a78bfa";  // Roxo
+            default:
+                return "#ffffff";
         }
     }
     

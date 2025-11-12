@@ -284,23 +284,49 @@
                             </Button>
                         </GridPane>
                     </VBox>
-                    
-                    <!-- Atividades Recentes -->
+                         <!-- Notas -->
+                   <VBox styleClass="form-card" spacing="20">
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <FontAwesomeIconView glyphName="REFRESH" size="24" fill="#ffffff"/>
+        <Label text="Notas" styleClass="page-title" 
+               style="-fx-font-size: 22px;"/>
+    </HBox>
+    
+    <Separator styleClass="separator"/>
+    
+            <!-- NOTAS -->
+            <GridPane hgap="15" vgap="15" alignment="CENTER">
+                <Button text="Notas" 
+                        onMouseClicked="#onCadastrarNotas"
+                        styleClass="button-primary"
+                        prefWidth="200"
+                        prefHeight="50"
+                        GridPane.columnIndex="0"
+                        GridPane.rowIndex="0">
+                    <graphic>
+                        <FontAwesomeIconView glyphName="BOOK" size="16"/>
+                    </graphic>
+                </Button>
+            </GridPane>
+        </VBox>
+                    <!-- ✅ ATIVIDADES RECENTES - CORRIGIDO COM fx:id -->
                     <VBox styleClass="form-card" spacing="20">
-                <HBox alignment="CENTER_LEFT" spacing="10">
-                    <Label text="Atividades Recentes" styleClass="page-title"/>
-                </HBox>
-                
-                <Separator styleClass="separator"/>
-                
-                <!-- ADICIONE fx:id AQUI -->
-                <VBox fx:id="vboxAtividades" spacing="15">
-                    <!-- As atividades serão adicionadas aqui dinamicamente -->
-                </VBox>
-            </VBox>
-                                    
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <FontAwesomeIconView glyphName="HISTORY" size="24" fill="#ffffff"/>
+                            <Label text="Atividades Recentes" styleClass="page-title" 
+                                  style="-fx-font-size: 22px;"/>
+                        </HBox>
+                        
+                        <Separator styleClass="separator"/>
+                        
+                        <!-- 🔧 ESTE É O CONTAINER QUE ESTAVA FALTANDO -->
+                        <VBox fx:id="vboxAtividades" spacing="15">
+                            <!-- As atividades serão adicionadas aqui dinamicamente pelo Controller -->
+                            <Label text="Carregando atividades..." 
+                                  style="-fx-text-fill: #737373; -fx-font-size: 14px;"/>
                         </VBox>
                     </VBox>
+                    
                 </VBox>
             </ScrollPane>
         </VBox>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.controller.CadastroNotaController"
+      spacing="20" style="-fx-background-color: #1e1e1e;">
+    
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+
+    <!-- TÍTULO -->
+    <Label text="📝 Cadastro de Notas por Bimestre" style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;">
+        <font>
+            <Font name="System Bold" size="28.0"/>
+        </font>
+    </Label>
+
+    <Separator style="-fx-background-color: #444;"/>
+
+    <!-- FORMULÁRIO -->
+    <HBox spacing="30" VBox.vgrow="ALWAYS">
+        
+        <!-- COLUNA ESQUERDA: FORMULÁRIO -->
+        <VBox spacing="20" prefWidth="400" HBox.hgrow="NEVER">
+            
+            <VBox spacing="8">
+                <Label text="📚 Dados da Nota" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+            </VBox>
+            
+            <!-- ALUNO -->
+            <VBox spacing="8">
+                <Label text="Aluno:" style="-fx-text-fill: white; -fx-font-size: 14px;"/>
+                <ComboBox fx:id="comboAluno" promptText="Selecione o aluno" maxWidth="Infinity"
+                          style="-fx-background-color: #2d2d2d; -fx-text-fill: white; -fx-pref-height: 45;"/>
+            </VBox>
+
+            <!-- DISCIPLINA -->
+            <VBox spacing="8">
+                <Label text="Disciplina:" style="-fx-text-fill: white; -fx-font-size: 14px;"/>
+                <ComboBox fx:id="comboDisciplina" promptText="Selecione a disciplina" maxWidth="Infinity"
+                          style="-fx-background-color: #2d2d2d; -fx-text-fill: white; -fx-pref-height: 45;"/>
+            </VBox>
+
+            <!-- BIMESTRE -->
+            <VBox spacing="8">
+                <Label text="Bimestre:" style="-fx-text-fill: white; -fx-font-size: 14px;"/>
+                <ComboBox fx:id="comboBimestre" promptText="Selecione o bimestre (1, 2, 3 ou 4)" maxWidth="Infinity"
+                          style="-fx-background-color: #2d2d2d; -fx-text-fill: white; -fx-pref-height: 45;"/>
+            </VBox>
+
+            <!-- NOTA -->
+            <VBox spacing="8">
+                <Label text="Nota (0.0 - 10.0):" style="-fx-text-fill: white; -fx-font-size: 14px;"/>
+                <TextField fx:id="txtNota" promptText="Digite a nota"
+                           style="-fx-background-color: #2d2d2d; -fx-text-fill: white; -fx-prompt-text-fill: #888; -fx-pref-height: 45;"/>
+            </VBox>
+
+            <Separator style="-fx-background-color: #444;"/>
+
+            <!-- MÉDIA E STATUS -->
+            <VBox spacing="10">
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Média Atual:" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    <Label fx:id="lblMediaAtual" text="0.00" style="-fx-text-fill: #64b5f6; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+                </HBox>
+
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Status:" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    <Label fx:id="lblStatus" text="-" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+                </HBox>
+            </VBox>
+
+            <Separator style="-fx-background-color: #444;"/>
+
+            <!-- BOTÕES -->
+            <VBox spacing="12">
+                <Button fx:id="btnSalvar" text="Salvar Nota" onAction="#salvarNota" maxWidth="Infinity"
+                        style="-fx-background-color: #4caf50; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand; -fx-pref-height: 50;"/>
+                
+                <Button fx:id="btnLimpar" text="Limpar Campos" onAction="#limparCampos" maxWidth="Infinity"
+                        style="-fx-background-color: #ff9800; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand; -fx-pref-height: 45;"/>
+                
+                <Button text="Deletar Nota Selecionada" onAction="#deletarNota" maxWidth="Infinity"
+                        style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand; -fx-pref-height: 45;"/>
+                
+                <Button text="Voltar" onAction="#onVoltar" maxWidth="Infinity"
+                        style="-fx-background-color: #2d2d2d; -fx-text-fill: white; -fx-font-size: 14px; -fx-cursor: hand; -fx-pref-height: 45;"/>
+            </VBox>
+            
+        </VBox>
+
+        <!-- COLUNA DIREITA: TABELA -->
+        <VBox spacing="15" HBox.hgrow="ALWAYS">
+            
+            <VBox spacing="8">
+                <Label text="📊 Notas Cadastradas" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+            </VBox>
+
+            <!-- BOTÕES DE LISTAR -->
+            <HBox spacing="12">
+                <Button fx:id="btnListarNotas" text="Listar Notas do Aluno" onAction="#listarNotasDoAluno"
+                        style="-fx-background-color: #2196f3; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-cursor: hand; -fx-pref-height: 45; -fx-pref-width: 200;"/>
+                
+                <Button text="Listar Todas as Notas" onAction="#listarTodasNotas"
+                        style="-fx-background-color: #673ab7; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-cursor: hand; -fx-pref-height: 45; -fx-pref-width: 200;"/>
+            </HBox>
+
+            <!-- TABELA -->
+            <TableView fx:id="tabelaNotas" VBox.vgrow="ALWAYS" style="-fx-background-color: #2d2d2d;">
+                <columns>
+                    <TableColumn fx:id="colAluno" text="Aluno" prefWidth="200"/>
+                    <TableColumn fx:id="colDisciplina" text="Disciplina" prefWidth="150"/>
+                    <TableColumn fx:id="colBimestre" text="Bimestre" prefWidth="100"/>
+                    <TableColumn fx:id="colNota" text="Nota" prefWidth="80"/>
+                    <TableColumn fx:id="colData" text="Data Lançamento" prefWidth="130"/>
+                </columns>
+            </TableView>
+
+            <!-- LEGENDA -->
+            <HBox spacing="15" style="-fx-padding: 10; -fx-background-color: #2d2d2d; -fx-background-radius: 8;">
+                <Label text="💡 Dica:" style="-fx-text-fill: #64b5f6; -fx-font-weight: bold;"/>
+                <Label text="Clique em uma linha da tabela para editar a nota" style="-fx-text-fill: #d4d4d8;"/>
+            </HBox>
+            
+        </VBox>
+
+    </HBox>
+
+</VBox>
