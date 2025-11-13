@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.controller.SidebarController"
+      fx:id="sidebarRoot"
+      styleClass="sidebar" 
+      spacing="0"
+      prefWidth="280"
+      minWidth="280">
+    
+    <!-- REMOVIDO: header com "Gestão Escolar" (agora fixo no TopBar) -->
+    
+    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+        <VBox spacing="0">
+            
+            <Label text="PRINCIPAL" styleClass="menu-section-title"/>
+            
+            <!-- Dashboard -->
+            <HBox fx:id="menuDashboard" styleClass="menu-item" spacing="12" alignment="CENTER_LEFT" 
+                  onMouseClicked="#onDashboard" style="-fx-cursor: hand;">
+                <FontAwesomeIconView glyphName="DASHBOARD" size="20" styleClass="menu-icon"/>
+                <Label text="Dashboard"/>
+            </HBox>
+            
+            <Label text="CADASTROS" styleClass="menu-section-title"/>
+            
+            <!-- Professores -->
+            <HBox fx:id="menuProfessores" styleClass="menu-item" spacing="12" alignment="CENTER_LEFT" 
+                  onMouseClicked="#onProfessores" style="-fx-cursor: hand;">
+                <FontAwesomeIconView glyphName="USER" size="20" styleClass="menu-icon"/>
+                <Label text="Professores"/>
+            </HBox>
+            
+            <!-- Alunos -->
+            <HBox fx:id="menuAlunos" styleClass="menu-item" spacing="12" alignment="CENTER_LEFT" 
+                  onMouseClicked="#onAlunos" style="-fx-cursor: hand;">
+                <FontAwesomeIconView glyphName="USERS" size="20" styleClass="menu-icon"/>
+                <Label text="Alunos"/>
+            </HBox>
+            
+            <!-- Turmas -->
+            <HBox fx:id="menuTurmas" styleClass="menu-item" spacing="12" alignment="CENTER_LEFT" 
+                  onMouseClicked="#onTurmas" style="-fx-cursor: hand;">
+                <FontAwesomeIconView glyphName="BUILDING" size="20" styleClass="menu-icon"/>
+                <Label text="Turmas"/>
+            </HBox>
+            
+            <!-- Cursos -->
+            <HBox fx:id="menuCursos" styleClass="menu-item" spacing="12" alignment="CENTER_LEFT" 
+                  onMouseClicked="#onCursos" style="-fx-cursor: hand;">
+                <FontAwesomeIconView glyphName="BOOK" size="20" styleClass="menu-icon"/>
+                <Label text="Cursos"/>
+            </HBox>
+            
+            <!-- Disciplinas -->
+            <HBox fx:id="menuDisciplinas" styleClass="menu-item" spacing="12" alignment="CENTER_LEFT" 
+                  onMouseClicked="#onDisciplinas" style="-fx-cursor: hand;">
+                <FontAwesomeIconView glyphName="BOOKMARK" size="20" styleClass="menu-icon"/>
+                <Label text="Disciplinas"/>
+            </HBox>
+            
+            <Label text="GESTÃO ACADÊMICA" styleClass="menu-section-title"/>
+            
+            <!-- Período Letivo -->
+            <HBox fx:id="menuPeriodoLetivo" styleClass="menu-item" spacing="12" alignment="CENTER_LEFT" 
+                  onMouseClicked="#onPeriodoLetivo" style="-fx-cursor: hand;">
+                <FontAwesomeIconView glyphName="CALENDAR" size="20" styleClass="menu-icon"/>
+                <Label text="Período Letivo"/>
+            </HBox>
+            
+            <!-- Horários -->
+            <HBox fx:id="menuHorarios" styleClass="menu-item" spacing="12" alignment="CENTER_LEFT" 
+                  onMouseClicked="#onHorarios" style="-fx-cursor: hand;">
+                <FontAwesomeIconView glyphName="CLOCK_ALT" size="20" styleClass="menu-icon"/>
+                <Label text="Horários"/>
+            </HBox>
+            
+            <!-- Notas -->
+            <HBox fx:id="menuNotas" styleClass="menu-item" spacing="12" alignment="CENTER_LEFT" 
+                  onMouseClicked="#onNotas" style="-fx-cursor: hand;">
+                <FontAwesomeIconView glyphName="EDIT" size="20" styleClass="menu-icon"/>
+                <Label text="Notas"/>
+            </HBox>
+            
+            <Label text="DOCUMENTOS" styleClass="menu-section-title"/>
+            
+            <!-- Certificados -->
+            <HBox fx:id="menuCertificados" styleClass="menu-item" spacing="12" alignment="CENTER_LEFT" 
+                  onMouseClicked="#onCertificados" style="-fx-cursor: hand;">
+                <FontAwesomeIconView glyphName="TROPHY" size="20" styleClass="menu-icon"/>
+                <Label text="Certificados"/>
+            </HBox>
+            
+            <Region VBox.vgrow="ALWAYS"/>
+            
+            <!-- Footer (mantive o usuário e botão Sair) -->
+            <VBox styleClass="user-info" spacing="8">
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <FontAwesomeIconView glyphName="USER_CIRCLE" size="32" fill="#ffffff"/>
+                    <VBox>
+                        <Label text="Administrador" styleClass="user-name"/>
+                        <Label text="admin@escola.com" styleClass="user-role"/>
+                    </VBox>
+                </HBox>
+                <Button text="Sair" 
+                       onAction="#onSair"
+                       styleClass="button-secondary"
+                       maxWidth="Infinity"
+                       prefHeight="40">
+                    <graphic>
+                        <FontAwesomeIconView glyphName="SIGN_OUT" size="16"/>
+                    </graphic>
+                </Button>
+            </VBox>
+        </VBox>
+    </ScrollPane>
+</VBox>

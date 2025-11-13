@@ -19,48 +19,44 @@ public class RegisterController {
     @FXML private TextField txtUsuario;
     @FXML private Label txtLabel;    
 
-  
-
-@FXML
-private void onEntrar(ActionEvent event) throws IOException {
-
-    // Carrega o novo arquivo FXML
-    if (txtSenha.getText().isEmpty() || txtUsuario.getText().isEmpty()){
-        txtLabel.setText("Não é permitido deixar o login em branco!!");
-    }else{
-         Parent novaCena = FXMLLoader.load(getClass().getResource("/com/example/fxml/Telainicial.fxml"));
-
-        // Pega a janela atual a partir do botão clicado
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        // Troca a cena
-        Scene scene = new Scene(novaCena);
-
-        // 🔧 CORRIGIDO: Aplicar CSS à nova cena
-        String cssPath = "/com/example/css/styles.css";
-        URL cssUrl = getClass().getResource(cssPath);
-        if (cssUrl != null) {
-            scene.getStylesheets().add(cssUrl.toExternalForm());
+    @FXML
+    private void onEntrar(ActionEvent event) throws IOException {
+        
+        if (txtSenha.getText().isEmpty() || txtUsuario.getText().isEmpty()){
+            txtLabel.setText("Não é permitido deixar o login em branco!!");
+        } else {
+            // ✅ CARREGA O MAINLAYOUT AGORA!
+            Parent novaCena = FXMLLoader.load(
+                getClass().getResource("/com/example/fxml/MainLayout.fxml")
+            );
+            
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(novaCena);
+            
+            // Aplica CSS
+            String cssPath = "/com/example/css/styles.css";
+            URL cssUrl = getClass().getResource(cssPath);
+            if (cssUrl != null) {
+                scene.getStylesheets().add(cssUrl.toExternalForm());
+            }
+            
+            stage.setScene(scene);
+            stage.setMaximized(true); // ✅ TELA CHEIA!
+            stage.show();
+            
+            System.out.println("✅ Login realizado! MainLayout carregado!");
         }
-
+    }
+    
+    @FXML
+    private void onTelaCadastro(ActionEvent event) throws IOException {
+        Parent novaCena = FXMLLoader.load(
+            getClass().getResource("/com/example/fxml/cadastrousuario.fxml")
+        );
+        
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(novaCena);
         stage.setScene(scene);
         stage.show();
-
     }
-
-}
-@FXML
-private void onTelaCadastro(ActionEvent event) throws IOException {
-     // Carrega o novo arquivo FXML
-
-    Parent novaCena = FXMLLoader.load(getClass().getResource("/com/example/fxml/cadastrousuario.fxml"));
-
-    // Pega a janela atual a partir do botão clicado
-    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-    // Troca a cena
-    Scene scene = new Scene(novaCena);
-    stage.setScene(scene);
-    stage.show();
-}
 }
