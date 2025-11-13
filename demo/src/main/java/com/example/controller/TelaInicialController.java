@@ -2,12 +2,16 @@ package com.example.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import com.example.model.AtividadeRecente;
 import com.example.repository.AtividadeRecenteDAO;
+import com.example.repository.DashboardDAO;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,83 +29,185 @@ import javafx.stage.Stage;
 
 public class TelaInicialController {
     
+    // ==================== LABELS DO DASHBOARD ====================
+    @FXML private Label lblTotalAlunos;
+    @FXML private Label lblPercentualAlunos;
+    @FXML private Label lblTotalProfessores;
+    @FXML private Label lblNovosProfessores;
+    @FXML private Label lblTotalCursos;
+    @FXML private Label lblStatusCursos;
+    @FXML private Label lblTotalTurmas;
+    @FXML private Label lblStatusTurmas;
+    
     @FXML private VBox vboxAtividades;
     
     private AtividadeRecenteDAO atividadeDAO = new AtividadeRecenteDAO();
+    private DashboardDAO dashboardDAO = new DashboardDAO();
     
     @FXML
     public void initialize() {
-        System.out.println("TelaInicial carregada!");
+        System.out.println("🎬 TelaInicial carregada!");
+        
+        // Carrega estatísticas do Dashboard
+        carregarEstatisticasDashboard();
+        
+        // Carrega atividades recentes
         carregarAtividadesRecentes();
     }
     
-    @FXML
-    private void onDashboard(MouseEvent event) {
-        System.out.println("Dashboard clicado");
+    /**
+     * NOVO: Carrega as estatísticas do Dashboard de forma assíncrona
+     */
+    private void carregarEstatisticasDashboard() {
+        Task<Map<String, Integer>> task = new Task<>() {
+            @Override
+            protected Map<String, Integer> call() {
+                System.out.println("📊 Carregando estatísticas do Dashboard...");
+                return dashboardDAO.getEstatisticasCompletas();
+            }
+        };
+        
+        task.setOnSucceeded(event -> {
+            Map<String, Integer> stats = task.getValue();
+            atualizarDashboardUI(stats);
+        });
+        
+        task.setOnFailed(event -> {
+            System.err.println("❌ Erro ao carregar estatísticas: " + task.getException().getMessage());
+            task.getException().printStackTrace();
+        });
+        
+        new Thread(task).start();
     }
     
-    @FXML
-    private void onCadastrarProfessor(MouseEvent event) {
-        try {
-            carregarCenaComRedimensionamento("/com/example/fxml/CadastroProfessor.fxml", event);
-        } catch (IOException e) {
-            e.printStackTrace();
+    /**
+     * Atualiza os valores da UI com as estatísticas
+     */
+    private void atualizarDashboardUI(Map<String, Integer> stats) {
+        Platform.runLater(() -> {
+            try {
+                // Total de Alunos
+                int totalAlunos = stats.getOrDefault("totalAlunos", 0);
+                updateLabel(lblTotalAlunos, String.valueOf(totalAlunos));
+                
+                // Percentual de crescimento (fictício 12%)
+                double percentual = dashboardDAO.getPercentualCrescimentoAlunos();
+                updateLabel(lblPercentualAlunos, String.format("+%.0f%% este mês", percentual));
+                
+                // Total de Professores
+                int totalProfessores = stats.getOrDefault("totalProfessores", 0);
+                updateLabel(lblTotalProfessores, String.valueOf(totalProfessores));
+                
+                // Novos Professores
+                int novosProfessores = stats.getOrDefault("novosProfessores", 0);
+                updateLabel(lblNovosProfessores, "+" + novosProfessores + " novos");
+                
+                // Total de Cursos
+                int totalCursos = stats.getOrDefault("totalCursos", 0);
+                updateLabel(lblTotalCursos, String.valueOf(totalCursos));
+                updateLabel(lblStatusCursos, "Em andamento");
+                
+                // Total de Turmas
+                int totalTurmas = stats.getOrDefault("totalTurmas", 0);
+                updateLabel(lblTotalTurmas, String.valueOf(totalTurmas));
+                
+                // Turmas Ativas
+                int turmasAtivas = stats.getOrDefault("turmasAtivas", 0);
+                if (turmasAtivas > 0) {
+                    updateLabel(lblStatusTurmas, turmasAtivas + " ativas no período");
+                } else {
+                    updateLabel(lblStatusTurmas, "Ativas no período");
+                }
+                
+                System.out.println("✅ Dashboard atualizado com sucesso!");
+                
+            } catch (Exception e) {
+                System.err.println("⚠️ Erro ao atualizar UI: " + e.getMessage());
+                e.printStackTrace();
+            }
+        });
+    }
+    
+    /**
+     * Helper para atualizar labels com segurança
+     */
+    private void updateLabel(Label label, String text) {
+        if (label != null) {
+            label.setText(text);
+        } else {
+            System.err.println("⚠️ Label não encontrado no FXML!");
         }
     }
     
-    @FXML
-    private void onCadastrarAluno(MouseEvent event) {
-        try {
-            carregarCenaComRedimensionamento("/com/example/fxml/CadastroAluno.fxml", event);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    // @FXML
+    // private void onDashboard(MouseEvent event) {
+    //     System.out.println("🔄 Recarregando Dashboard...");
+    //     carregarEstatisticasDashboard();
+    //     carregarAtividadesRecentes();
+    // }
     
-    @FXML
-    private void onCadastrarTurma(MouseEvent event) {
-        try {
-            carregarCenaComRedimensionamento("/com/example/fxml/CadastroTurma.fxml", event);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    // @FXML
+    // private void onCadastrarProfessor(MouseEvent event) {
+    //     try {
+    //         carregarCenaComRedimensionamento("/com/example/fxml/CadastroProfessor.fxml", event);
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
     
-    @FXML
-    private void onCadastrarCurso(MouseEvent event) {
-        try {
-            carregarCenaComRedimensionamento("/com/example/fxml/CadastroCurso.fxml", event);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    // @FXML
+    // private void onCadastrarAluno(MouseEvent event) {
+    //     try {
+    //         carregarCenaComRedimensionamento("/com/example/fxml/CadastroAluno.fxml", event);
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
     
-    @FXML
-    private void onCadastrarDisciplina(MouseEvent event) {
-        try {
-            carregarCenaComRedimensionamento("/com/example/fxml/CadastroDisciplina.fxml", event);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    // @FXML
+    // private void onCadastrarTurma(MouseEvent event) {
+    //     try {
+    //         carregarCenaComRedimensionamento("/com/example/fxml/CadastroTurma.fxml", event);
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
     
-    @FXML
-    private void onPeriodoLetivo(MouseEvent event) {
-        try {
-            carregarCenaComRedimensionamento("/com/example/fxml/PeriodoLetivo.fxml", event);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    // @FXML
+    // private void onCadastrarCurso(MouseEvent event) {
+    //     try {
+    //         carregarCenaComRedimensionamento("/com/example/fxml/CadastroCurso.fxml", event);
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
     
-    @FXML
-    private void onCadastroHorario(MouseEvent event) {
-        try {
-            carregarCenaComRedimensionamento("/com/example/fxml/CadastroHorario.fxml", event);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    // @FXML
+    // private void onCadastrarDisciplina(MouseEvent event) {
+    //     try {
+    //         carregarCenaComRedimensionamento("/com/example/fxml/CadastroDisciplina.fxml", event);
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
+    
+    // @FXML
+    // private void onPeriodoLetivo(MouseEvent event) {
+    //     try {
+    //         carregarCenaComRedimensionamento("/com/example/fxml/PeriodoLetivo.fxml", event);
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
+    
+    // @FXML
+    // private void onCadastroHorario(MouseEvent event) {
+    //     try {
+    //         carregarCenaComRedimensionamento("/com/example/fxml/CadastroHorario.fxml", event);
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
     
     @FXML
     private void onCadastrarCurso2(MouseEvent event) {
@@ -138,6 +244,7 @@ public class TelaInicialController {
             e.printStackTrace();
         }
     }
+    
     @FXML
     private void onCadastrarNotas(MouseEvent event) {
         try {
@@ -147,35 +254,54 @@ public class TelaInicialController {
         }
     }
     
-    @FXML
-    private void onCertificados(MouseEvent event) {
-        System.out.println("Certificados - Em desenvolvimento");
-    }
+    // @FXML
+    // private void onCertificados(MouseEvent event) {
+    //     System.out.println("📜 Certificados - Em desenvolvimento");
+    // }
     
     /**
      * Carrega as ultimas atividades recentes do banco
      */
     private void carregarAtividadesRecentes() {
         if (vboxAtividades == null) {
-            System.err.println("vboxAtividades e NULL! Adicione fx:id no FXML!");
+            System.err.println("❌ vboxAtividades é NULL! Verifique o fx:id no FXML!");
             return;
         }
         
-        List<AtividadeRecente> atividades = atividadeDAO.listarRecentes(5);
+        Task<List<AtividadeRecente>> task = new Task<>() {
+            @Override
+            protected List<AtividadeRecente> call() {
+                return atividadeDAO.listarRecentes(5);
+            }
+        };
         
-        vboxAtividades.getChildren().clear();
+        task.setOnSucceeded(event -> {
+            List<AtividadeRecente> atividades = task.getValue();
+            
+            Platform.runLater(() -> {
+                vboxAtividades.getChildren().clear();
+                
+                if (atividades.isEmpty()) {
+                    Label lblVazio = new Label("Nenhuma atividade recente");
+                    lblVazio.setStyle("-fx-text-fill: #737373; -fx-font-size: 14px;");
+                    vboxAtividades.getChildren().add(lblVazio);
+                    return;
+                }
+                
+                for (AtividadeRecente atividade : atividades) {
+                    HBox item = criarItemAtividade(atividade);
+                    vboxAtividades.getChildren().add(item);
+                }
+                
+                System.out.println("✅ " + atividades.size() + " atividades carregadas!");
+            });
+        });
         
-        if (atividades.isEmpty()) {
-            Label lblVazio = new Label("Nenhuma atividade recente");
-            lblVazio.setStyle("-fx-text-fill: #737373; -fx-font-size: 14px;");
-            vboxAtividades.getChildren().add(lblVazio);
-            return;
-        }
+        task.setOnFailed(event -> {
+            System.err.println("❌ Erro ao carregar atividades: " + task.getException().getMessage());
+        });
         
-        for (AtividadeRecente atividade : atividades) {
-            HBox item = criarItemAtividade(atividade);
-            vboxAtividades.getChildren().add(item);
-        }
+        new Thread(task).start();
     }
     
     /**
@@ -184,7 +310,7 @@ public class TelaInicialController {
     private HBox criarItemAtividade(AtividadeRecente atividade) {
         HBox hbox = new HBox(15);
         hbox.setAlignment(Pos.CENTER_LEFT);
-        hbox.setStyle("-fx-padding: 12; -fx-background-color: #0a0a0a; -fx-background-radius: 8;");
+        hbox.setStyle("-fx-padding: 12; -fx-background-color: #18181b; -fx-background-radius: 8;");
         
         // ✅ ÍCONE COM FONTAWESOME
         FontAwesomeIconView icone = new FontAwesomeIconView(getIconeFontAwesome(atividade.getTipo()));
@@ -251,7 +377,7 @@ public class TelaInicialController {
     }
     
     private void carregarCenaComRedimensionamento(String caminho, MouseEvent event) throws IOException {
-        System.out.println("Carregando: " + caminho);
+        System.out.println("📂 Carregando: " + caminho);
         
         Parent novaCena = FXMLLoader.load(getClass().getResource(caminho));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -273,20 +399,20 @@ public class TelaInicialController {
         
         stage.show();
         
-        System.out.println("Cena carregada: " + stage.getWidth() + "x" + stage.getHeight());
+        System.out.println("✅ Cena carregada: " + stage.getWidth() + "x" + stage.getHeight());
     }
     
-    @FXML
-    private void onVoltar(ActionEvent event) throws IOException {
-        Parent novaCena = FXMLLoader.load(getClass().getResource("/com/example/fxml/register.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(novaCena);
+    // @FXML
+    // private void onVoltar(ActionEvent event) throws IOException {
+    //     Parent novaCena = FXMLLoader.load(getClass().getResource("/com/example/fxml/register.fxml"));
+    //     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    //     Scene scene = new Scene(novaCena);
         
-        String css = getClass().getResource("/com/example/css/styles.css").toExternalForm();
-        scene.getStylesheets().add(css);
+    //     String css = getClass().getResource("/com/example/css/styles.css").toExternalForm();
+    //     scene.getStylesheets().add(css);
         
-        stage.setScene(scene);
-        stage.sizeToScene();
-        stage.show();
-    }
+    //     stage.setScene(scene);
+    //     stage.sizeToScene();
+    //     stage.show();
+    // }
 }

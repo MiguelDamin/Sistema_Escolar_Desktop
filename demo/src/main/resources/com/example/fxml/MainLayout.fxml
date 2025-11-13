@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.controller.MainLayoutController"
+            stylesheets="@../css/styles.css"
+            styleClass="root">
+
+    <!-- Topbar fixo -->
+    <top>
+        <HBox fx:id="topbar" styleClass="content-header" alignment="CENTER_LEFT" spacing="12" prefHeight="64">
+            <Button fx:id="btnToggleMenu" onAction="#onToggleMenu"
+                    styleClass="button-icon" style="-fx-background-color: transparent; -fx-cursor: hand;">
+                <graphic>
+                    <FontAwesomeIconView fx:id="iconToggleMenu" glyphName="BARS" size="20" fill="#ffffff"/>
+                </graphic>
+            </Button>
+
+            <!-- LOGO / GESTÃO ESCOLAR (fixo na topbar) -->
+            <HBox fx:id="logoBox" alignment="CENTER_LEFT" spacing="10" styleClass="topbar-logo">
+                <FontAwesomeIconView glyphName="GRADUATION_CAP" size="24" fill="#ffffff"/>
+                <VBox>
+                    <Label text="Gestão Escolar" styleClass="sidebar-title"/>
+                    <Label text="Sistema Administrativo" styleClass="sidebar-subtitle"/>
+                </VBox>
+            </HBox>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <!-- título da página (à direita) - ícone e texto juntos -->
+            <HBox alignment="CENTER_RIGHT" spacing="8" style="-fx-padding: 0 12 0 0;">
+                <FontAwesomeIconView fx:id="iconTopBar" glyphName="DASHBOARD" size="20" fill="#ffffff"/>
+                <Label fx:id="lblTituloTopBar" text="Dashboard" styleClass="page-title"/>
+                <Label fx:id="lblSubtituloTopBar" text="Visão geral do sistema" styleClass="page-subtitle"/>
+            </HBox>
+        </HBox>
+    </top>
+
+    <!-- Left: sidebar direto (sem spacer) -->
+    <left>
+        <StackPane fx:id="sidebarContainer" style="-fx-padding: 0; -fx-background-color: transparent;"/>
+    </left>
+
+    <!-- Área principal: agora com ScrollPane para permitir rolagem vertical das páginas -->
+    <center>
+        <ScrollPane fx:id="mainScroll" fitToWidth="true" fitToHeight="true" pannable="false"
+                    hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" style="-fx-background-color: transparent;">
+            <content>
+                <StackPane fx:id="contentArea">
+                    <Label text="Carregando..." style="-fx-text-fill: #737373;"/>
+                </StackPane>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>
