@@ -1,23 +1,34 @@
-
 module com.example {
-    // JavaFX
+    // ========== JAVAFX ==========
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.graphics;
     
-    // MySQL
+    // ========== BANCO DE DADOS ==========
     requires java.sql;
     
-    // FontAwesome
+    // ========== FONTAWESOME ==========
     requires de.jensd.fx.glyphs.fontawesome;
     
-    // Exporta os pacotes necessários
+    // ========== iTEXT 7 (PDF) ==========
+    requires kernel;
+    requires layout;
+    requires io;
+    requires forms;
+    requires pdfa;
+    
+    // ========== JAVA DESKTOP (para abrir PDF) ==========
+    requires java.desktop;
+    
+    // ========== EXPORTS ==========
     exports com.example;
     exports com.example.controller;
     exports com.example.model;
     exports com.example.repository;
+    exports com.example.service;  // ⭐ NOVO
     exports com.example.util;
     
-    // Permite que JavaFX acesse os controllers via reflection
+    // ========== OPENS (para FXML reflection) ==========
     opens com.example to javafx.fxml;
     opens com.example.controller to javafx.fxml;
     opens com.example.model to javafx.base;

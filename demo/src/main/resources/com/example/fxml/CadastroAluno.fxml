@@ -3,91 +3,155 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17"
+<ScrollPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.controller.CadastroAlunoController"
-            stylesheets="@../css/styles.css">
-
-    <!-- Formulário à esquerda -->
-    <left>
-        <VBox spacing="12" alignment="TOP_LEFT" style="-fx-padding:18;" prefWidth="520">
-            <Label text="Cadastro de Aluno" styleClass="h1"/>
+            fitToWidth="true"
+            style="-fx-background-color: transparent;">
+    
+    <VBox spacing="20" style="-fx-padding: 30;">
+        
+        <!-- Cabeçalho -->
+        <VBox spacing="8">
+            <Label text="Cadastro de Aluno" styleClass="page-title"/>
+            <Label text="Preencha os dados do aluno e do responsável" styleClass="page-subtitle"/>
+        </VBox>
+        
+        <Separator styleClass="separator"/>
+        
+        <!-- CARD: DADOS DO ALUNO -->
+        <VBox styleClass="form-card" spacing="20">
+            <Label text="📚 Dados do Aluno" styleClass="section-title"/>
             
-            <GridPane hgap="10" vgap="10">
+            <GridPane hgap="15" vgap="15">
                 <columnConstraints>
-                    <ColumnConstraints percentWidth="30"/>
-                    <ColumnConstraints percentWidth="70"/>
+                    <ColumnConstraints percentWidth="50"/>
+                    <ColumnConstraints percentWidth="50"/>
                 </columnConstraints>
-
-                <Label text="Nome:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                <TextField fx:id="txtNome" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-
-                <Label text="Idade:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                <TextField fx:id="txtIdade" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-
-                <Label text="CPF:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                <TextField fx:id="txtCpf" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-
-                <Label text="Email:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-                <TextField fx:id="txtEmail" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-
-                <Label text="Telefone:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-                <TextField fx:id="txtTelefone" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
-
-                <Label text="Data Nasc.:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-                <DatePicker fx:id="dtDataNascimento" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
-
-                <Label text="Turma:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
-                <ComboBox fx:id="cbTurma" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+                
+                <!-- Nome -->
+                <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label text="Nome Completo *"/>
+                    <TextField fx:id="txtNome" promptText="Digite o nome completo" prefHeight="45"/>
+                </VBox>
+                
+                <!-- Idade -->
+                <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <Label text="Idade *"/>
+                    <TextField fx:id="txtIdade" promptText="Ex: 15" prefHeight="45"/>
+                </VBox>
+                
+                <!-- CPF -->
+                <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <Label text="CPF *"/>
+                    <TextField fx:id="txtCpf" promptText="Somente números" prefHeight="45"/>
+                </VBox>
+                
+                <!-- Data de Nascimento -->
+                <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label text="Data de Nascimento *"/>
+                    <DatePicker fx:id="dtDataNascimento" promptText="dd/mm/aaaa" prefHeight="45" maxWidth="Infinity"/>
+                </VBox>
+                
+                <!-- Email -->
+                <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                    <Label text="Email"/>
+                    <TextField fx:id="txtEmail" promptText="email@exemplo.com" prefHeight="45"/>
+                </VBox>
+                
+                <!-- Telefone -->
+                <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <Label text="Telefone"/>
+                    <TextField fx:id="txtTelefone" promptText="(00) 00000-0000" prefHeight="45"/>
+                </VBox>
+                
+                <!-- Turma -->
+                <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2">
+                    <Label text="Turma *"/>
+                    <ComboBox fx:id="cbTurma" promptText="Selecione a turma" maxWidth="Infinity" prefHeight="45"/>
+                </VBox>
             </GridPane>
-
-            <Separator/>
-
-            <Label text="Responsável" styleClass="h2"/>
-            <GridPane hgap="10" vgap="10">
+        </VBox>
+        
+        <!-- CARD: DADOS DO RESPONSÁVEL -->
+        <VBox styleClass="form-card" spacing="20">
+            <Label text="👨‍👩‍👧 Dados do Responsável" styleClass="section-title"/>
+            
+            <GridPane hgap="15" vgap="15">
                 <columnConstraints>
-                    <ColumnConstraints percentWidth="30"/>
-                    <ColumnConstraints percentWidth="70"/>
+                    <ColumnConstraints percentWidth="50"/>
+                    <ColumnConstraints percentWidth="50"/>
                 </columnConstraints>
-
-                <Label text="Nome:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                <TextField fx:id="txtNomeResponsavel" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-
-                <Label text="CPF:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                <TextField fx:id="txtCpfResponsavel" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-
-                <Label text="Telefone:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                <TextField fx:id="txtTelefoneResponsavel" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-
-                <Label text="Email:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-                <TextField fx:id="txtEmailResponsavel" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-
-                <Label text="Endereço:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-                <TextField fx:id="txtEnderecoResponsavel" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
-
-                <Label text="Parentesco:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-                <ComboBox fx:id="cbParentesco" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                
+                <!-- Nome do Responsável -->
+                <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label text="Nome Completo *"/>
+                    <TextField fx:id="txtNomeResponsavel" promptText="Nome do responsável" prefHeight="45"/>
+                </VBox>
+                
+                <!-- CPF do Responsável -->
+                <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <Label text="CPF *"/>
+                    <TextField fx:id="txtCpfResponsavel" promptText="Somente números" prefHeight="45"/>
+                </VBox>
+                
+                <!-- Telefone do Responsável -->
+                <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <Label text="Telefone"/>
+                    <TextField fx:id="txtTelefoneResponsavel" promptText="(00) 00000-0000" prefHeight="45"/>
+                </VBox>
+                
+                <!-- Email do Responsável -->
+                <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label text="Email"/>
+                    <TextField fx:id="txtEmailResponsavel" promptText="email@exemplo.com" prefHeight="45"/>
+                </VBox>
+                
+                <!-- Endereço -->
+                <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                    <Label text="Endereço"/>
+                    <TextField fx:id="txtEnderecoResponsavel" promptText="Rua, número, bairro" prefHeight="45"/>
+                </VBox>
+                
+                <!-- Parentesco -->
+                <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <Label text="Parentesco *"/>
+                    <ComboBox fx:id="cbParentesco" promptText="Selecione o parentesco" maxWidth="Infinity" prefHeight="45"/>
+                </VBox>
             </GridPane>
-
-            <HBox spacing="10" alignment="CENTER_RIGHT">
-                <Button text="Limpar" onAction="#onLimpar"/>
-                <Button text="Salvar" onAction="#onSalvar"/>
-            </HBox>
         </VBox>
-    </left>
+        
+        <!-- Botões -->
+        <HBox spacing="15" alignment="CENTER">
+            <Button text="Limpar Campos" onAction="#onLimpar" styleClass="button-secondary" 
+                    prefWidth="200" prefHeight="50"/>
+            <Button text="Salvar Aluno" onAction="#onSalvar" styleClass="button-success" 
+                    prefWidth="200" prefHeight="50"/>
+        </HBox>
+        
+            <!-- Nota sobre campos obrigatórios -->
+            <Label text="* Campos obrigatórios" style="-fx-text-fill: #737373; -fx-font-size: 12px;"/>
 
-    <!-- Lista de alunos (TableView) à direita -->
-    <center>
-        <VBox spacing="8" style="-fx-padding:18;">
-            <Label text="Alunos Cadastrados" styleClass="h1"/>
-            <TableView fx:id="tblEstudantes" prefHeight="600" columnResizePolicy="CONSTRAINED_RESIZE_POLICY">
-                <columns>
-                    <TableColumn fx:id="colId" text="ID" prefWidth="60"/>
-                    <TableColumn fx:id="colNome" text="Nome" prefWidth="220"/>
-                    <TableColumn fx:id="colTurma" text="Turma" prefWidth="140"/>
-                    <TableColumn fx:id="colEditar" text="Editar" prefWidth="100"/>
-                </columns>
-            </TableView>
+            <VBox styleClass="form-card" spacing="20">
+        <Label text="👥 Alunos Cadastrados" styleClass="section-title"/>
+        
+        <TableView fx:id="tblEstudantes" prefHeight="400" maxHeight="500">
+            <columns>
+                <TableColumn fx:id="colId" text="ID" prefWidth="60" />
+                <TableColumn fx:id="colNome" text="Nome" prefWidth="200" />
+                <TableColumn fx:id="colCpf" text="CPF" prefWidth="120" />
+                <TableColumn fx:id="colTurma" text="Turma" prefWidth="150" />
+                <TableColumn fx:id="colAcoes" text="Ações" prefWidth="100" />
+            </columns>
+        </TableView>
+        
+        <HBox spacing="10">
+            <Button text="📝 Editar Selecionado" onAction="#onEditarAluno" 
+                    styleClass="button-primary" prefWidth="180" prefHeight="45"/>
+            <Button text="🔄 Atualizar Lista" onAction="#onAtualizarLista" 
+                    styleClass="button-secondary" prefWidth="180" prefHeight="45"/>
+        </HBox>
+    </VBox>
+            
         </VBox>
-    </center>
-</BorderPane>
+</ScrollPane>

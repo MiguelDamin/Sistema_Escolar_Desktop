@@ -63,4 +63,26 @@ public class TurmaDAO {
         
         return turmas;
     }
+            /**
+     * Buscar turma por ID
+     */
+    public Turma buscarPorId(int idTurma) throws SQLException {
+        String sql = "SELECT * FROM turma WHERE id_turma = ?";
+        
+        try (Connection conn = DatabaseConnection.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, idTurma);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                Turma turma = new Turma();
+                turma.setId_turma(rs.getInt("id_turma"));
+                turma.setNome(rs.getString("nome_turma"));
+                turma.setId_periodo_letivo(rs.getInt("id_periodo_letivo"));
+                return turma;
+            }
+        }
+        return null;
+    }
 }

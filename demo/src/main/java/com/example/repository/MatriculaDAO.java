@@ -43,4 +43,39 @@ public class MatriculaDAO {
             throw new SQLException("Erro ao obter ID da matrícula inserida.");
         }
     }
+    /**
+ * Atualizar turma da matrícula
+ */
+public boolean atualizarTurma(int idEstudante, int novaTurmaId) throws SQLException {
+    String sql = "UPDATE matricula SET id_turma = ? WHERE id_estudante = ?";
+    
+    try (Connection conn = DatabaseConnection.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        
+        stmt.setInt(1, novaTurmaId);
+        stmt.setInt(2, idEstudante);
+        
+        int linhas = stmt.executeUpdate();
+        return linhas > 0;
+    }
+}
+
+/**
+ * Buscar ID da turma atual do aluno
+ */
+    public int buscarTurmaAtual(int idEstudante) throws SQLException {
+        String sql = "SELECT id_turma FROM matricula WHERE id_estudante = ?";
+        
+        try (Connection conn = DatabaseConnection.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, idEstudante);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                return rs.getInt("id_turma");
+            }
+        }
+        return -1; // Não encontrado
+    }
 }

@@ -112,21 +112,52 @@ public class MainLayoutController {
         }
     }
 
-    public void carregarPagina(String nomeFXML, String titulo, String subtitulo, String nomeIcone) {
-        if (contentArea == null) return;
+public void carregarPagina(String nomeFXML, String titulo, String subtitulo, String nomeIcone) {
+        System.out.println("=== CARREGANDO PÁGINA ===");
+        System.out.println("FXML: " + nomeFXML);
+        System.out.println("Título: " + titulo);
+        System.out.println("Stack trace:");
+        Thread.dumpStack(); // MOSTRA QUEM CHAMOU ESTE MÉTODO
+        
+        if (contentArea == null) {
+            System.err.println("❌ ERRO: contentArea é NULL!");
+            return;
+        }
+        
         try {
-            Parent conteudo;
-            try {
-                conteudo = FXMLLoader.load(getClass().getResource("/com/example/fxml/" + nomeFXML));
-            } catch (Exception ex) {
-                conteudo = FXMLLoader.load(getClass().getResource("/com/example/fxml/pages/" + nomeFXML));
+            java.net.URL resource = getClass().getResource("/com/example/fxml/" + nomeFXML);
+            System.out.println("Tentativa 1 (/com/example/fxml/): " + resource);
+            
+            if (resource == null) {
+                resource = getClass().getResource("/com/example/fxml/pages/" + nomeFXML);
+                System.out.println("Tentativa 2 (/com/example/fxml/pages/): " + resource);
             }
+
+            if (resource == null) {
+                System.err.println("❌ FXML não encontrado: " + nomeFXML);
+                return;
+            }
+
+            System.out.println("✅ FXML encontrado: " + resource);
+            FXMLLoader loader = new FXMLLoader(resource);
+            Parent conteudo = loader.load();
+            System.out.println("✅ FXML carregado com sucesso!");
+
             contentArea.getChildren().clear();
             contentArea.getChildren().add(conteudo);
+            System.out.println("✅ ContentArea atualizada! Children count: " + contentArea.getChildren().size());
+            
             atualizarTopBar(titulo, subtitulo, nomeIcone);
+            System.out.println("✅ TopBar atualizada!");
+            
         } catch (IOException e) {
+            System.err.println("❌ Erro IOException: " + e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("❌ Erro inesperado: " + e.getMessage());
             e.printStackTrace();
         }
+        System.out.println("========================");
     }
 
     private void atualizarTopBar(String titulo, String subtitulo, String nomeIcone) {

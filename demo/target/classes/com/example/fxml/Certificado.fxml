@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.controller.CertificadoController"
+            fitToWidth="true"
+            style="-fx-background-color: transparent;">
+    
+    <VBox spacing="20" style="-fx-padding: 30;">
+        
+        <!-- Cabeçalho -->
+        <VBox spacing="8">
+            <Label text="🏆 Geração de Certificados" styleClass="page-title"/>
+            <Label text="Selecione o aluno e a disciplina para emitir o certificado" styleClass="page-subtitle"/>
+        </VBox>
+        
+        <Separator styleClass="separator"/>
+        
+        <!-- CARD: SELEÇÃO -->
+        <VBox styleClass="form-card" spacing="20" maxWidth="700">
+            <Label text="📋 Selecione os Dados" styleClass="section-title"/>
+            
+            <VBox spacing="15">
+                
+                <!-- Aluno -->
+                <VBox spacing="8">
+                    <Label text="Aluno *" style="-fx-font-weight: bold;"/>
+                    <ComboBox fx:id="comboAluno" 
+                             promptText="Selecione o aluno" 
+                             maxWidth="Infinity" 
+                             prefHeight="50"/>
+                </VBox>
+                
+                <!-- Disciplina -->
+                <VBox spacing="8">
+                    <Label text="Disciplina *" style="-fx-font-weight: bold;"/>
+                    <ComboBox fx:id="comboDisciplina" 
+                             promptText="Selecione a disciplina" 
+                             maxWidth="Infinity" 
+                             prefHeight="50"/>
+                </VBox>
+                
+            </VBox>
+        </VBox>
+        
+        <!-- CARD: INFORMAÇÕES -->
+        <VBox styleClass="form-card" spacing="20" maxWidth="700">
+            <Label text="📊 Informações do Aluno" styleClass="section-title"/>
+            
+            <GridPane hgap="30" vgap="20">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="33"/>
+                    <ColumnConstraints percentWidth="33"/>
+                    <ColumnConstraints percentWidth="33"/>
+                </columnConstraints>
+                
+                <!-- Bimestres -->
+                <VBox spacing="8" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                      style="-fx-background-color: #27272a; -fx-background-radius: 8; -fx-padding: 15;">
+                    <Label text="Bimestres" style="-fx-text-fill: #a1a1aa; -fx-font-size: 12px;"/>
+                    <Label fx:id="lblBimestres" text="--" 
+                           style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+                </VBox>
+                
+                <!-- Média -->
+                <VBox spacing="8" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0"
+                      style="-fx-background-color: #27272a; -fx-background-radius: 8; -fx-padding: 15;">
+                    <Label text="Média Final" style="-fx-text-fill: #a1a1aa; -fx-font-size: 12px;"/>
+                    <Label fx:id="lblMediaAtual" text="--" 
+                           style="-fx-text-fill: #60a5fa; -fx-font-size: 32px; -fx-font-weight: bold;"/>
+                </VBox>
+                
+                <!-- Status -->
+                <VBox spacing="8" alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="0"
+                      style="-fx-background-color: #27272a; -fx-background-radius: 8; -fx-padding: 15;">
+                    <Label text="Status" style="-fx-text-fill: #a1a1aa; -fx-font-size: 12px;"/>
+                    <Label fx:id="lblStatus" text="--" 
+                           style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+                </VBox>
+            </GridPane>
+            
+            <!-- Aviso -->
+            <VBox spacing="10" style="-fx-background-color: #3b3b3b; -fx-background-radius: 8; -fx-padding: 15;">
+                <Label text="ℹ️ Requisitos para Emissão:" style="-fx-font-weight: bold; -fx-text-fill: #60a5fa;"/>
+                <Label text="• O aluno deve ter notas cadastradas nos 4 bimestres" 
+                       style="-fx-text-fill: #d4d4d8;"/>
+                <Label text="• Média mínima de 6.0 para aprovação" 
+                       style="-fx-text-fill: #d4d4d8;"/>
+                <Label text="• Alunos reprovados receberão certificado de participação" 
+                       style="-fx-text-fill: #d4d4d8;"/>
+            </VBox>
+        </VBox>
+        
+        <!-- Botões -->
+        <HBox spacing="15" alignment="CENTER" maxWidth="700">
+            <Button text="Limpar Campos" 
+                   onAction="#limparCampos" 
+                   styleClass="button-secondary" 
+                   prefWidth="200" 
+                   prefHeight="55"/>
+            
+            <Button text="🖨️ Gerar Certificado PDF" 
+                   onAction="#gerarCertificado" 
+                   styleClass="button-success" 
+                   prefWidth="250" 
+                   prefHeight="55"
+                   style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+        </HBox>
+        
+        <!-- Nota sobre campos obrigatórios -->
+        <Label text="* Campos obrigatórios" 
+               style="-fx-text-fill: #737373; -fx-font-size: 12px;"
+               alignment="CENTER"/>
+        
+    </VBox>
+</ScrollPane>

@@ -66,10 +66,15 @@ public class SidebarController {
         }
     }
     
-    @FXML
+@FXML
     private void onAlunos(MouseEvent event) {
-        System.out.println("👨‍🎓 Navegando para Alunos");
+        System.out.println("=== DEBUG ALUNOS ===");
+        System.out.println("1. Método onAlunos() foi chamado!");
+        System.out.println("2. Event: " + event);
+        System.out.println("3. mainController é null? " + (mainController == null));
+        
         if (mainController != null) {
+            System.out.println("4. Chamando carregarPagina...");
             mainController.carregarPagina(
                 "CadastroAluno.fxml",
                 "Alunos",
@@ -77,7 +82,11 @@ public class SidebarController {
                 "USERS"
             );
             marcarMenuAtivo(menuAlunos);
+            System.out.println("5. carregarPagina executado!");
+        } else {
+            System.err.println("❌ ERRO: mainController é NULL!");
         }
+        System.out.println("===================");
     }
     
     @FXML
@@ -165,9 +174,23 @@ public class SidebarController {
     }
     
     @FXML
-    private void onCertificados(MouseEvent event) {
-        System.out.println("🏆 Certificados - Em desenvolvimento");
-        marcarMenuAtivo(menuCertificados);
+    private void onCertificados() {
+        String fxml = "Certificado.fxml";
+
+        // checa existência do resource em dois locais possíveis
+        java.net.URL res = getClass().getResource("/com/example/fxml/" + fxml);
+        if (res == null) res = getClass().getResource("/com/example/fxml/pages/" + fxml);
+
+        if (res == null) {
+            System.err.println("FXML não encontrado para Certificados: " + fxml + " — verifique /com/example/fxml/");
+            return;
+        }
+
+        if (mainController != null) {
+            mainController.carregarPagina(fxml, "Certificados", "Documentos", "FILE");
+        } else {
+            System.err.println("MainLayoutController não está disponível.");
+        }
     }
     
     @FXML

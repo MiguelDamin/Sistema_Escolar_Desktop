@@ -20,8 +20,51 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>17.0.2</version>
-        </dependency>
+            </dependency>
+            <!-- Adicione esta dependência no seu pom.xml dentro de <dependencies> -->
 
+
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itext7-core</artifactId>
+            <version>7.2.5</version>
+            <type>pom</type>
+        </dependency>
+        <!-- ========== iTEXT 7 - Geração de PDF ========== -->
+<!-- KERNEL (núcleo do iText) -->
+<dependency>
+    <groupId>com.itextpdf</groupId>
+    <artifactId>kernel</artifactId>
+    <version>7.2.5</version>
+</dependency>
+
+<!-- LAYOUT (para formatação de documentos) -->
+<dependency>
+    <groupId>com.itextpdf</groupId>
+    <artifactId>layout</artifactId>
+    <version>7.2.5</version>
+</dependency>
+
+<!-- IO (entrada/saída) -->
+<dependency>
+    <groupId>com.itextpdf</groupId>
+    <artifactId>io</artifactId>
+    <version>7.2.5</version>
+</dependency>
+
+<!-- FORMS (formulários PDF) -->
+<dependency>
+    <groupId>com.itextpdf</groupId>
+    <artifactId>forms</artifactId>
+    <version>7.2.5</version>
+</dependency>
+
+<!-- PDFA (padrão PDF/A) -->
+<dependency>
+    <groupId>com.itextpdf</groupId>
+    <artifactId>pdfa</artifactId>
+    <version>7.2.5</version>
+</dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
