@@ -558,180 +558,62 @@ Label {
 }
 
 /* Estilo escuro para a tabela de alunos (prioriza o fx:id se presente) */
-#tblEstudantes, .table-view {
-    -fx-background-color: transparent; /* container */
+#tblEstudantes, #tblProfessores {
+    -fx-background-color: transparent;
     -fx-border-color: transparent;
 }
 
-/* Remove barra branca / filler do cabeçalho da TableView */
-.table-view .table-header-row,
-.table-view .column-header-background,
+/* Cabeçalho */
 #tblEstudantes .table-header-row,
-#tblEstudantes .column-header-background {
-    -fx-background-color: linear-gradient(#222424, #1b1b1b);
-    -fx-border-color: transparent;
-}
-
-/* Remove partes internas que podem ficar brancas */
-.table-view .column-header-background .corner,
-.table-view .column-header-background .filler,
-.table-view .column-header-background .sheet,
-#tblEstudantes .column-header-background .corner,
-#tblEstudantes .column-header-background .filler {
-    -fx-background-color: transparent;
-}
-
-/* Cabeçalho: texto claro */
-.table-view .column-header .label,
-#tblEstudantes .column-header .label {
-    -fx-text-fill: #e6e6e6;
-}
-
-/* Garante que a "sheet" da tabela não pinte branco */
-.table-view .sheet,
-#tblEstudantes .sheet {
-    -fx-background-color: transparent;
-}
-
-/* Linhas - tons de cinza alternados para contraste com o fundo escuro */
-#tblEstudantes .table-row-cell:odd  { -fx-background-color: #2e2e2e; }
-#tblEstudantes .table-row-cell:even { -fx-background-color: #262626; }
-
-/* Células */
-#tblEstudantes .table-cell, .table-view .table-cell {
-    -fx-text-fill: #e0e0e0;
-    -fx-padding: 6 8;
-    -fx-border-color: transparent;
-    -fx-background-color: transparent;
-}
-
-/* Linha selecionada */
-#tblEstudantes .table-row-cell:selected {
-    -fx-background-color: linear-gradient(#3b7d3b, #2f6f2f); /* verde suave */
-}
-#tblEstudantes .table-row-cell:focused {
-    -fx-background-color: linear-gradient(#3b7d3b, #2f6f2f);
-}
-
-/* Espaço vazio / filler */
-#tblEstudantes .filler { -fx-background-color: transparent; }
-
-/* Botões dentro da tabela (se estiverem com estilo padrão) */
-#tblEstudantes .button {
-    -fx-background-color: transparent;
-    -fx-background-radius: 4px;
-}
-
-/* scrollbar leve (opcional) */
-#tblEstudantes .scroll-bar .thumb {
-    -fx-background-color: rgba(255,255,255,0.08);
-}
-#tblEstudantes .scroll-bar .track {
-    -fx-background-color: transparent;
-}
-
-/* =========================
-   Tabela de Professores - estilo igual à tabela de Alunos
-   ========================= */
-#tblProfessores, .table-view {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-}
-
-/* Força TableView Professores igual ao TableView Alunos (altura de linha, padding, header) */
-#tblProfessores {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-    -fx-padding: 10 12;
-}
-
-/* cabeçalho */
+#tblEstudantes .column-header-background,
 #tblProfessores .table-header-row,
 #tblProfessores .column-header-background {
     -fx-background-color: linear-gradient(#222424, #1b1b1b);
     -fx-border-color: transparent;
-    -fx-pref-height: 40px;
 }
 
-/* rótulos do cabeçalho */
-#tblProfessores .column-header .label {
-    -fx-text-fill: #e6e6e6;
-    -fx-font-weight: 600;
-    -fx-font-size: 13px;
-    -fx-padding: 8 10;
+/* Remove fillers brancos apenas nesses IDs */
+#tblEstudantes .column-header-background .corner,
+#tblEstudantes .column-header-background .filler,
+#tblEstudantes .sheet,
+#tblProfessores .column-header-background .corner,
+#tblProfessores .column-header-background .filler,
+#tblProfessores .sheet {
+    -fx-background-color: transparent;
 }
 
-/* linhas: mesma altura do tblEstudantes (ajuste fino) */
-#tblProfessores .table-row-cell {
+/* Linhas alternadas e células (mesmo estilo para ambos) */
+#tblEstudantes .table-row-cell:odd, #tblProfessores .table-row-cell:odd  { -fx-background-color: #2e2e2e; }
+#tblEstudantes .table-row-cell:even, #tblProfessores .table-row-cell:even { -fx-background-color: #262626; }
+
+#tblEstudantes .table-cell, #tblProfessores .table-cell {
+    -fx-text-fill: #e0e0e0;
+    -fx-padding: 6 12;
+    -fx-background-color: transparent;
+}
+
+/* Mesma altura das linhas (força paridade visual) */
+#tblEstudantes .table-row-cell, #tblProfessores .table-row-cell {
     -fx-pref-height: 36px;
     -fx-min-height: 36px;
     -fx-max-height: 36px;
 }
 
-/* células: mesmo padding/estilo */
-#tblProfessores .table-cell {
-    -fx-text-fill: #e0e0e0;
-    -fx-padding: 6 12;
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-}
-
-/* linhas alternadas */
-#tblProfessores .table-row-cell:odd  { -fx-background-color: #2e2e2e; }
-#tblProfessores .table-row-cell:even { -fx-background-color: #262626; }
-
-/* seleção igual à tabela de alunos */
-#tblProfessores .table-row-cell:selected,
-#tblProfessores .table-row-cell:focused {
+/* Seleção (igual para ambos) */
+#tblEstudantes .table-row-cell:selected, #tblProfessores .table-row-cell:selected,
+#tblEstudantes .table-row-cell:focused, #tblProfessores .table-row-cell:focused {
     -fx-background-color: linear-gradient(#3b7d3b, #2f6f2f);
 }
 
-/* remover fillers/brancos */
-#tblProfessores .column-header-background .corner,
-#tblProfessores .column-header-background .filler,
-#tblProfessores .sheet,
-#tblProfessores .filler {
-    -fx-background-color: transparent;
-}
-
-/* scrollbar */
-#tblProfessores .scroll-bar .thumb { -fx-background-color: rgba(255,255,255,0.08); }
-#tblProfessores .scroll-bar .track { -fx-background-color: transparent; }
-
-/* Aumenta botão de Ações em tblProfessores e ajusta fonte das células */
-#tblProfessores .table-cell .button,
-#tblProfessores .table-cell .button:focused,
-#tblProfessores .table-cell .button:hover {
-    -fx-font-size: 13px;        /* aumenta texto do botão */
-    -fx-padding: 6 14;          /* aumenta área clicável (vertical horizontal) */
-    -fx-min-height: 30px;
-    -fx-pref-height: 30px;
-    -fx-background-radius: 6px;
-}
-
-/* Se preferir diminuir a fonte do conteúdo da tabela (torna os botões visualmente maiores) */
-#tblProfessores .table-cell {
-    -fx-font-size: 12px;        /* diminui fonte das células */
-    -fx-padding: 6 12;
-}
-
-/* Ajuste fino do alinhamento vertical dos botões dentro das células */
-#tblProfessores .table-row-cell .table-cell {
-    -fx-alignment: CENTER_LEFT; /* garante alinhamento consistente */
-}
-
-/* Centraliza e limita largura do card do cadastro de professor */
-#tblProfessores, .table-view { /* ...existing... */ }
-
-/* Forçar largura e centralização do form-card (aplica quando card está dentro de HBox) */
-.form-card {
-    -fx-max-width: 1000px;
+/* --- Centralização específica só para o card de professor --- */
+.prof-form-card {
+    -fx-alignment: top-center;
     -fx-pref-width: 1000px;
+    -fx-max-width: 1000px;
     -fx-min-width: 320px;
-    -fx-alignment: top-left; /* mantém o conteúdo alinhado ao topo interno do card */
 }
 
-/* Caso queira um pequeno offset lateral automático no HBox */
-HBox[alignment="TOP_CENTER"] > .form-card {
-    -fx-margin: 0; /* sem margem padrão */
+/* Garante que o .form-card continue alinhado à esquerda por padrão (não afeta professor se usar prof-form-card) */
+.form-card {
+    -fx-alignment: top-left;
 }
