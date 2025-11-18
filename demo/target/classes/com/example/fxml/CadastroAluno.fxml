@@ -21,7 +21,7 @@
         
         <!-- CARD: DADOS DO ALUNO -->
         <VBox styleClass="form-card" spacing="20">
-            <Label text="📚 Dados do Aluno" styleClass="section-title"/>
+            <Label text="Dados do Aluno" styleClass="section-title"/>
             
             <GridPane hgap="15" vgap="15">
                 <columnConstraints>
@@ -75,7 +75,7 @@
         
         <!-- CARD: DADOS DO RESPONSÁVEL -->
         <VBox styleClass="form-card" spacing="20">
-            <Label text="👨‍👩‍👧 Dados do Responsável" styleClass="section-title"/>
+            <Label text="Dados do Responsável" styleClass="section-title"/>
             
             <GridPane hgap="15" vgap="15">
                 <columnConstraints>
@@ -146,9 +146,9 @@
         </TableView>
         
         <HBox spacing="10">
-            <Button text="📝 Editar Selecionado" onAction="#onEditarAluno" 
+            <Button text="Editar Selecionado" onAction="#onEditarAluno" 
                     styleClass="button-primary" prefWidth="180" prefHeight="45"/>
-            <Button text="🔄 Atualizar Lista" onAction="#onAtualizarLista" 
+            <Button text="Atualizar Lista" onAction="#onAtualizarLista" 
                     styleClass="button-secondary" prefWidth="180" prefHeight="45"/>
         </HBox>
     </VBox>

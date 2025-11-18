@@ -14,7 +14,7 @@
     <VBox spacing="30" style="-fx-padding: 30; -fx-background-color: transparent;">
         
         <!-- ==================== FORMULÁRIO DE CADASTRO ==================== -->
-        <HBox alignment="TOP_CENTER" prefWidth="100%" spacing="0">
+        <HBox alignment="TOP_CENTER" prefWidth="1000" spacing="0">
             <VBox styleClass="form-card" prefWidth="1000" maxWidth="1000">
                 
                 <VBox styleClass="card" spacing="25" maxWidth="800">

@@ -99,7 +99,7 @@
 
                             <GridPane hgap="15" vgap="15" alignment="CENTER">
                                 <Button text="Novo Aluno" 
-                                        onAction="#onCadastrarAluno2"
+                                        onMouseClicked="#onCadastrarAluno2"
                                         styleClass="button-primary"
                                         prefWidth="200" prefHeight="50"
                                         GridPane.columnIndex="0" GridPane.rowIndex="0">
@@ -109,7 +109,7 @@
                                 </Button>
 
                                 <Button text="Novo Professor" 
-                                        onAction="#onCadastrarProfessor2"
+                                        onMouseClicked="#onCadastrarProfessor2"
                                         styleClass="button-primary"
                                         prefWidth="200" prefHeight="50"
                                         GridPane.columnIndex="1" GridPane.rowIndex="0">
@@ -119,7 +119,7 @@
                                 </Button>
 
                                 <Button text="Novo Curso" 
-                                        onAction="#onCadastrarCurso2"
+                                        onMouseClicked="#onCadastrarCurso2"
                                         styleClass="button-primary"
                                         prefWidth="200" prefHeight="50"
                                         GridPane.columnIndex="2" GridPane.rowIndex="0">
@@ -129,7 +129,7 @@
                                 </Button>
 
                                 <Button text="Nova Turma" 
-                                        onAction="#onCadastrarTurma2"
+                                        onMouseClicked="#onCadastrarTurma2"
                                         styleClass="button-primary"
                                         prefWidth="200" prefHeight="50"
                                         GridPane.columnIndex="3" GridPane.rowIndex="0">

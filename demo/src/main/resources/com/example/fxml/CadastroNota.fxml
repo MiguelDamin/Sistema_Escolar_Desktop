@@ -14,7 +14,7 @@
     </padding>
 
     <!-- TÍTULO -->
-    <Label text="📝 Cadastro de Notas por Bimestre" style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;">
+    <Label text="Cadastro de Notas por Bimestre" style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;">
         <font>
             <Font name="System Bold" size="28.0"/>
         </font>
@@ -29,7 +29,7 @@
         <VBox spacing="20" prefWidth="400" HBox.hgrow="NEVER">
             
             <VBox spacing="8">
-                <Label text="📚 Dados da Nota" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <Label text="Dados da Nota" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
             </VBox>
             
             <!-- ALUNO -->
@@ -98,7 +98,7 @@
         <VBox spacing="15" HBox.hgrow="ALWAYS">
             
             <VBox spacing="8">
-                <Label text="📊 Notas Cadastradas" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <Label text="Notas Cadastradas" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
             </VBox>
 
             <!-- BOTÕES DE LISTAR -->
@@ -123,7 +123,7 @@
 
             <!-- LEGENDA -->
             <HBox spacing="15" style="-fx-padding: 10; -fx-background-color: #2d2d2d; -fx-background-radius: 8;">
-                <Label text="💡 Dica:" style="-fx-text-fill: #64b5f6; -fx-font-weight: bold;"/>
+                <Label text="Dica:" style="-fx-text-fill: #64b5f6; -fx-font-weight: bold;"/>
                 <Label text="Clique em uma linha da tabela para editar a nota" style="-fx-text-fill: #d4d4d8;"/>
             </HBox>
             
